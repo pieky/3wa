@@ -1,0 +1,3 @@
+AppBundle\Entity\Hobby:
+    hobby{1..6}:
+        name (unique): <randomElement(['Escalade','Natation','Rando','Running','Cinema','Lecture'])>

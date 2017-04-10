@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{  training.name }} {% endblock %}
+{% block pagename %}La Formation - {{  training.name }}{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-7 col-md-offset-2">
+
+            <h2>{{ training.name }}</h2>
+            <p>
+                Durant la formation vous etudierez les modules suivants : <br>
+
+                {% include 'training/inc/listModules.html.twig' %}
+            </p>
+            <p>
+                {% include 'training/inc/action.html.twig' %}
+            </p>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}

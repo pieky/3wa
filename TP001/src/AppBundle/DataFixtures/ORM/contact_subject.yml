@@ -1,0 +1,3 @@
+AppBundle\Entity\ContactSubject:
+    subject{1..4}:
+        content (unique): <randomElement(['je vous poursuis en justice','Demande de désabonnement','Livraison en cours','Suppression de compte'])>

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un module {% endblock %}
+{% block pagename %} Ajouter un module {% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xs-6">
+            {{ form_start(form, { 'attr' : { 'novalidate' : 'novalidate', 'class' : 'form-horizontal' } })  }}
+
+            <div class="form-group">
+                {{ form_label(form.name, 'Nom', { 'label_attr' : { 'class' : 'col-sm-2 control-label' }}) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.name, { 'attr' : { 'class' : 'form-control' }}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="{{ url('app.module.index') }}" class="btn btn-default" role="button">Retour à la liste des modules</a>
+                    <a href="{{ url('app.training.form') }}" class="btn btn-primary" role="button">Ajouter une formation</a>
+                    <button type="submit" class="btn btn-success">Valider</button>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}

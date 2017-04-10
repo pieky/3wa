@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+{% block title %}Yo!{% endblock %}
+
+{% block aside %}
+    <p>
+        {{ dump(app.request) }}
+        {{ my_function() }}
+    </p>
+{% endblock %}
+{% block body %}
+
+    <p>{{ key | reverse | capitalize }}</p>
+    <p>{{ date | date('d/m/Y') }}</p>
+    <hr>
+    <p>
+        <ul>
+            {% for key, value in list %}
+                <li>{{ key }} : <b>{{ value }}</b></li>
+            {% endfor %}
+            {# = php pure -> foreach($list as $key => $value) #}
+        </ul>
+    </p>
+    <hr>
+    <p>
+        <ul>
+            {% for i in 0..(list | length - 1) %}
+                <li>{{ 'key' ~ i }} : <b>{{ list['key' ~ i] }}</b> ({{ 'key' ~ i ~ ' : ' ~ list['key' ~ i] }})</li>
+            {% endfor %}
+            {# = php pure -> for($i=0 , $i < count($list) ; $i++) #}
+        </ul>
+    </p>
+    <hr>
+    <p>
+        {# $var = 'valeur'; #}
+        {% set meteo = 'soleil' %}
+        {% set temperature = 19 %}
+
+        {% if meteo  == 'soleil' and temperature >= 20 %}
+            <p>Plage</p>
+        {% elseif meteo == 'nuageux'%}
+            <p>Cinéma</p>
+        {% else %}
+            <p>Musée</p>
+        {% endif %}
+    </p>
+    <hr>
+    <p>
+        {# isset() : defined // empty #}
+        {% if cake is not defined %}
+            The cake is a lie
+        {%  endif %}
+    </p>
+    <hr>
+    <p>
+        {#
+            construire un lien :
+                relatif : path(routeName)
+                absolu : url(routeName)
+        #}
+        <a href="{{ url('app.default.hello') }}">Hello</a><br>
+        <a href="{{ url('app.default.hello', { 'name' : 'pieky' }) }}">Hello with Arg</a><br>
+        <a href="{{ url('app.twig.layout') }}"> Layout Page</a>
+    </p>
+    <hr>
+    <p>
+        {#
+            get external assets (css, js, img, video, etc.)
+                asset() : cible le dossier "web" (seul dossier public)
+        #}
+        <div class="col s12 m7">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ asset('img/haiku.png') }}" alt="Haiku Stairs">
+                    <span class="card-title">Haiku Stairs</span>
+                </div>
+            </div>
+        </div>
+    </p>
+    <p>
+        {{ highlight('cake','The cake is a lie') | raw }}
+    </p>
+    <p>
+        {{ 'piek' | password_hash }}
+    <p>
+        Code google : {{ code_ga }}
+    </p>
+    <p>
+        Code fb : {{ code_fb }}
+    </p>
+    <p>
+        Code twitter : {{ code_twitter }}
+    </p>
+
+{% endblock %}

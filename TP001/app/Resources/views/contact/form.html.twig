@@ -1,0 +1,76 @@
+{% extends 'blank.html.twig' %}
+{% block title %}Formulaire de Contact{% endblock %}
+
+{% block stylesheets %}
+<style>
+    ul.validation_errors {
+        color:red;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+    <h3>Contact</h3>
+
+    {#
+      variable "form" est envoyée par le controleur
+      fonction twig pour les formulaire :
+        - form_start(form) : <form>
+        - form_end(form) : </form>
+        - form_label(fieldName*) : <label>
+        - form_widget(fieldName*) : afficher le champ du formulaire
+        - form_errors(fieldName*) : erreur d'un champ
+
+
+        *nom du champ defini ds la classe formulaire
+    #}
+
+    {{ form_start(form, { 'attr' : { 'novalidate' : 'novalidate' } }) }}
+        <p class="input-field">
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName, { 'attr' : { 'data-length' : '50' } }) }}
+            {{ form_errors(form.firstName, { 'attr' : { 'class' : 'card-panel' }}) }}
+        </p>
+        <p class="input-field">
+            {{ form_label(form.lastName) }}
+            {{ form_widget(form.lastName, { 'attr' : { 'data-length' : '50' } }) }}
+            {{ form_errors(form.lastName) }}
+        </p>
+        <p class="input-field">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, { 'attr' : { 'data-length' : '100' } }) }}
+            {{ form_errors(form.email) }}
+        </p>
+        <p class="select-wrapper">
+            {{ form_label(form.subject) }}
+            {#{{ form_widget(form.subject, { 'attr' : { 'class' : 'browser-default' }}) }} SANS JS #}
+            {{ form_widget(form.subject) }}
+            {{ form_errors(form.subject) }}
+        </p><br>
+        <p class="select-wrapper">
+            {{ form_label(form.hobbies) }}
+            {{ form_widget(form.hobbies) }}
+            {{ form_errors(form.hobbies) }}
+        </p><br>
+        <p class="input-field">
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message, { 'attr' : { 'class' : 'materialize-textarea' , 'placeholder' : 'Saississez votre message'}}) }}
+            {{ form_errors(form.message) }}
+        </p>
+        <a href="{{ url('app.contact.index') }}" class="btn waves-effect">Retour à la liste</a>
+        <button class="btn waves-effect" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button>
+
+
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('select').material_select();
+    </script>
+{% endblock %}

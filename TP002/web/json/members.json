@@ -1,0 +1,26 @@
+{
+  "member1":{
+    "firstName":"Barack",
+    "lastName":"Obama",
+    "email":"barack.obama@gmail.com",
+    "img":"http:\/\/lorempixel.com\/400\/200\/people\/1\/"
+  },
+  "member2":{
+    "firstName":"Vladimir",
+    "lastName":"Poutine",
+    "email":"vladimir.poutine@gmail.com",
+    "img":"http:\/\/lorempixel.com\/400\/200\/people\/2\/"
+  },
+  "member3":{
+    "firstName":"Mark",
+    "lastName":"zuckerberg",
+    "email":"mark.zuckerberg@gmail.com",
+    "img":"http:\/\/lorempixel.com\/400\/200\/people\/3\/"
+  },
+  "member4":{
+    "firstName":"zenou",
+    "lastName":"piek",
+    "email":"mlkj]@gmail.com",
+    "img":"http:\/\/lorempixel.com\/400\/200\/people\/4"
+  }
+}

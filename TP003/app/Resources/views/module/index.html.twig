@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Module List {% endblock %}
+{% block pagename %}Modules{% endblock %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+                <a href="{{ url('app.module.form') }}" class="btn btn-success btn-xs">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                </a>
+                Module Name
+            </th>
+            <th>Trainings</th>
+            <th></th>
+        </tr>
+        {% for key, module in modules %}
+            <tr>
+                <td> <a href="{{ url('app.module.view', {'slug' : module.slug }) }}">{{ module.name }}</a></td>
+                <td>
+                    {% include ':module/inc:listTraining.html.twig' %}
+                </td>
+                <td>
+                    {% include ':module/inc:action.html.twig' %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Members List{%  endblock %}
+
+{% block body %}
+    <h1>Members List</h1>
+    <table class="table striped">
+        <tr>
+            <th colspan="2">First name</th>
+            <th>Last name</th>
+            <th>
+                <a href="{{ url('app.members.form') }}" class="btn-floating btn-small waves-effect waves-light">
+                    <i class="material-icons">add</i>
+                </a>
+            </th>
+        </tr>
+        {% for id, member in members %}
+            <tr>
+                <td width="100"><img src="{{ asset(member.img) }}" alt="{{ member.img }}" class="responsive-img circle"></td>
+                <td>{{ member.firstName }}</td>
+                <td>{{ member.lastName }}</td>
+                <td>
+                    <a href="{{ url('app.members.detail', { 'id' : id }) }}" class="btn-floating btn-small waves-effect waves-light">
+                        <i class="material-icons left">info_outline</i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

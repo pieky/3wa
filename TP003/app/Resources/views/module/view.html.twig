@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ module.name }} {% endblock %}
+{% block pagename %}Le Module - {{ module.name }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-7 col-md-offset-2">
+            <h2>{{ module.name }}</h2>
+            <p>
+                Le module est utilisé dans les formations suivantes : <br>
+
+                {% include ':module/inc:listTraining.html.twig' %}
+            </p>
+            <p>
+                {% include ':module/inc:action.html.twig' %}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}

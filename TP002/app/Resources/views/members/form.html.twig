@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Members List{%  endblock %}
+
+{% block body %}
+    <h1>Members form</h1>
+    <form action="{{ url('app.members.form.new') }}" method="post">
+        <p>
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName">
+        </p>
+        <p>
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastName">
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input type="text" name="email">
+        </p>
+        <p>
+            <input type="submit" class="btn">
+        </p>
+    </form>
+
+{% endblock %}

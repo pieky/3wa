@@ -1,0 +1,8 @@
+AppBundle\Entity\Contact:
+    contact{1..50}:
+        firstName: <fr_FR:firstName()>
+        lastName: <fr_FR:lastName()>
+        email: <email()>
+        message: <text(100)>
+        subject: '@subject*'
+        hobbies: <numberBetween(1,6)>x @hobby*

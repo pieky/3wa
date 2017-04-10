@@ -1,0 +1,3 @@
+{% for key, training in module.trainings %}
+    <a href="{{ url('app.training.view', {'slug' : training.slug }) }}" class="btn btn-primary btn-xs" role="button">{{ training.name }}</a>
+{% endfor %}

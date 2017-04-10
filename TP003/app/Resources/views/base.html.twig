@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}TP003{% endblock %}</title>
+
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <style>
+        </style>
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        {{ render_menu() | raw }}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>{% block pagename %}{% endblock %}</h1>
+                    <br>
+                </div>
+                <div class="row">
+                    <main class="col-xs-12">
+
+
+                        {% for notice in app.session.flashbag.get('notice') %}
+                            <div class="alert alert-success" role="alert">{{ notice }}</div>
+                        {% endfor %}
+
+
+                        {% block body %}{% endblock %}
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

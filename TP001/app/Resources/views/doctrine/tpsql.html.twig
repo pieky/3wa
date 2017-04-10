@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block title %}TP SQL !{% endblock %}
+
+{% block aside %}
+{% endblock %}
+
+{% block body %}
+
+    <p># Sélectionner **toutes les colonnes de tous les films**</p>
+    {{ dump(sql1) }}<hr>
+
+    <p># Sélectionner le **nom de tous les réalisateurs**</p>
+    {{ dump(sql2) }}<hr>
+
+    <p># Sélectionner le **titre** et la **description** de tous les films en utilisant des **alias**</p>
+    {{ dump(sql3) }}<hr>
+
+    <p># Sélectionner le **titre** des films sortis à partir de **1980** et qui possède le mot **les** dans le titre</p>
+    {{ dump(sql4) }}<hr>
+
+    <p># Sélectionner le **titre** des films dont le réalisateur est **Akira Kurosawa**</p>
+    {{ dump(sql5) }}<hr>
+
+    <p># Sélectionner le **titre** et le **genre** des films de **Sergio Leone**</p>
+    {{ dump(sql6) }}<hr>
+
+    <p># Sélectionner le **nom des acteurs français** ayant joué dans des films de **Steven Spielberg**</p>
+    {{ dump(sql7) }}<hr>
+
+    <p># Sélectionner le **titre**, la **date de sortie** et le **nom du réalisateur** des films sortis dans les années **1990**</p>
+    {{ dump(sql8) }}<hr>
+
+    <p># Sélectionner le **nom des acteurs** et les classer par **ordre alphabétique**</p>
+    {{ dump(sql9) }}<hr>
+
+    <p># Sélectionner le **nombre de films par réalisateur** et les classer par **ordre alphabétique**</p>
+    {{ dump(sql10) }}<hr>
+
+    <p># Sélectionner le **nombre de films** sortis en **1968**</p>
+    {{ dump(sql11) }}<hr>
+
+    <p># Sélectionner le **film le plus récent**</p>
+    {{ dump(sql12) }}<hr>
+
+    <p># Sélectionner un **film au hasard**</p>
+    {{ dump(sql13) }}<hr>
+
+{% endblock %}

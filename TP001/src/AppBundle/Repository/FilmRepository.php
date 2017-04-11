@@ -92,13 +92,14 @@ class FilmRepository extends \Doctrine\ORM\EntityRepository{
 
         $results = $this
             ->createQueryBuilder('film')
-            ->select('film.titre, genres.nom')
+            ->select('film.titre, GROUP_CONCAT(genres.nom)')
             ->join('film.realisateurs','realisateurs')
             ->join('film.genres','genres')
             ->where('realisateurs.nom = :nom')
             ->setParameters([
                 'nom' => 'leone'
             ])
+            ->groupBy('film.titre')
             ->getQuery()
             ->getResult()
         ;

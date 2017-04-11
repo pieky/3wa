@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Category
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+    use ORMBehaviors\Sluggable\Sluggable;
+
     /**
      * @var int
      *
@@ -61,5 +64,15 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * get sluggableFields
+     *
+     * @return array
+     */
+    public function getSluggableFields()
+    {
+        return [ 'name' ];
     }
 }

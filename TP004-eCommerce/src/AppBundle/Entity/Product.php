@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Product
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Product
 {
+    use ORMBehaviors\Sluggable\Sluggable;
+
     /**
      * @var int
      *
@@ -232,5 +235,15 @@ class Product
     public function getSubcategories()
     {
         return $this->subcategories;
+    }
+
+    /**
+     * get sluggableFields
+     *
+     * @return array
+     */
+    public function getSluggableFields()
+    {
+        return [ 'name' ];
     }
 }

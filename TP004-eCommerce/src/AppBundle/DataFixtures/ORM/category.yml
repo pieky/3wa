@@ -1,0 +1,9 @@
+AppBundle\Entity\Category:
+    category_livre:
+        name: Livre
+
+    category_bluray:
+        name: Bluray
+
+    category_musique:
+        name: Musique

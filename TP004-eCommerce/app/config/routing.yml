@@ -1,0 +1,4 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+    prefix: /{_locale}  #ajout du code locale ds tte les routes

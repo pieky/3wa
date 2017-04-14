@@ -10,6 +10,16 @@ services:
 
     app.twig.app_extension:
         class: AppBundle\Twig\AppExtension
-        arguments: ['@doctrine', '@twig']
+        arguments: ['@doctrine', '@twig', '@request_stack']
+        tags:
+            - { name: twig.extension }
+
+    app.twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    app.twig.extension.text:
+        class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }

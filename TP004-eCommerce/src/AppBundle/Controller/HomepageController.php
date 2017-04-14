@@ -13,8 +13,21 @@ class HomepageController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('homepage/index.html.twig', [
+        $locale = $request->getLocale();
+        $doctrine = $this->getDoctrine();
+        $categories = $doctrine->getRepository('AppBundle:Category')->getCategoriesByLocale($locale);
+        $randomProducts = $doctrine->getRepository('AppBundle:Product')->getRandomProducts(3);
 
+        return $this->render('homepage/index.html.twig', [
+            'categories' => $categories,
+            'randomProducts' => $randomProducts
         ]);
+    }
+
+    /**
+     * @Route("/updateroute", name="app.homepage.updateroute")
+     */
+    public function updaterouteAction(Request $request){
+
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <h2>{{ subcategory.translations[currentLocal].name | capitalize }}</h2>
+
+        {% for product in products %}
+            {%  include 'product/one_product.html.twig' %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

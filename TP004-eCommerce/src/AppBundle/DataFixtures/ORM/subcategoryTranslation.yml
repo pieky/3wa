@@ -1,0 +1,30 @@
+AppBundle\Entity\SubCategoryTranslation:
+    sub_category_cat1_translations_fr{1..5}:
+        name : fr_cat1_souscategorie_<current()>
+        locale: fr
+        translatable: '@subcategory_cat1<current()>'
+
+    sub_category_cat1_translations_en{1..5}:
+        name : en_cat1_subcategory_<current()>
+        locale: en
+        translatable: '@subcategory_cat1<current()>'
+
+    sub_category_cat2_translations_fr{1..5}:
+        name : fr_cat2_souscategorie_<current()>
+        locale: fr
+        translatable: '@subcategory_cat2<current()>'
+
+    sub_category_cat2_translations_en{1..5}:
+        name : en_cat2_subcategory_<current()>
+        locale: en
+        translatable: '@subcategory_cat2<current()>'
+
+    sub_category_cat3_translations_fr{1..5}:
+        name : fr_cat3_souscategorie_<current()>
+        locale: fr
+        translatable: '@subcategory_cat3<current()>'
+
+    sub_category_cat3_translations_en{1..5}:
+        name : en_cat3_subcategory_<current()>
+        locale: en
+        translatable: '@subcategory_cat3<current()>'

@@ -1,0 +1,36 @@
+AppBundle\Entity\ProductTranslation:
+    product_fr_cat1{1..30}:
+        name: produit_cat1_<current()>
+        description: <text()>
+        locale: fr
+        translatable: '@product_cat1<current()>'
+
+    product_en_cat1{1..30}:
+        name: product_cat1_<current()>
+        description: <text()>
+        locale: en
+        translatable: '@product_cat1<current()>'
+
+    product_fr_cat2{1..30}:
+        name: produit_cat2_<current()>
+        description: <text()>
+        locale: fr
+        translatable: '@product_cat2<current()>'
+
+    product_en_cat2{1..30}:
+        name: product_cat2_<current()>
+        description: <text()>
+        locale: en
+        translatable: '@product_cat2<current()>'
+
+    product_fr_cat3{1..30}:
+        name: produit_cat3_<current()>
+        description: <text()>
+        locale: fr
+        translatable: '@product_cat3<current()>'
+
+    product_en_cat3{1..30}:
+        name: product_cat3_<current()>
+        description: <text()>
+        locale: en
+        translatable: '@product_cat3<current()>'

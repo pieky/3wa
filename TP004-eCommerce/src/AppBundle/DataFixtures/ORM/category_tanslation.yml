@@ -1,0 +1,10 @@
+AppBundle\Entity\CategoryTranslation:
+    category_translations_fr{1..3}:
+        name : categorie<current()>
+        locale: fr
+        translatable: '@category<current()>'
+
+    category_translations_en{1..3}:
+        name : category<current()>
+        locale: en
+        translatable: '@category<current()>'

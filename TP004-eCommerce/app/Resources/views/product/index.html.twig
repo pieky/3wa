@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xs-5 text-left">
+
+        </div>
+        <div class="col-xs-7">
+            <h2>{{ product.translations[currentLocal].name | capitalize }}</h2>
+        </div>
+    </div>
+    <div class="row main-product">
+        <div class="col-xs-4">
+            <img src="{{ product.image }}" alt="{{ product.translations[currentLocal].name }}" class="img-thumbnail img-responsive">
+        </div>
+        <div class="col-xs-8">
+            <p class="text-right">{{ product.stock | render_stock }}</p>
+            <p class="text-justify description">{{ product.translations[currentLocal].description }}</p>
+            <p><h3 class="text-right">{{ product.price | localizedcurrency('EUR') }}</h3></p>
+        </div>
+    </div>
+
+{% endblock %}

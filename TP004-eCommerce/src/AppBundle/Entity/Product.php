@@ -13,7 +13,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Product
 {
-    use ORMBehaviors\Sluggable\Sluggable;
+    use ORMBehaviors\Translatable\Translatable;
 
     /**
      * @var int
@@ -23,13 +23,6 @@ class Product
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=150)
-     */
-    private $name;
 
     /**
      * @var string
@@ -44,13 +37,6 @@ class Product
      * @ORM\Column(name="stock", type="smallint")
      */
     private $stock;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    private $description;
 
     /**
      * @var string
@@ -70,7 +56,7 @@ class Product
 
 
     public function __construct() {
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->subcategories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -81,30 +67,6 @@ class Product
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Product
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -153,30 +115,6 @@ class Product
     public function getStock()
     {
         return $this->stock;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Product
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -235,15 +173,5 @@ class Product
     public function getSubcategories()
     {
         return $this->subcategories;
-    }
-
-    /**
-     * get sluggableFields
-     *
-     * @return array
-     */
-    public function getSluggableFields()
-    {
-        return [ 'name' ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
@@ -13,7 +14,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  */
 class Category
 {
-    use ORMBehaviors\Sluggable\Sluggable;
+    use ORMBehaviors\Translatable\Translatable;
 
     /**
      * @var int
@@ -25,12 +26,21 @@ class Category
     private $id;
 
     /**
-     * @var string
+     * @var bool
      *
-     * @ORM\Column(name="name", type="string", length=150, unique=true)
+     * @ORM\Column(name="is_active", type="boolean")
      */
-    private $name;
+    private $isActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="SubCategory", mappedBy="category")
+     */
+    private $subcategories;
+
+    
+    public function __construct() {
+        $this->subcategories = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -43,30 +53,6 @@ class Category
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Category
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * get sluggableFields
      *
      * @return array
@@ -74,5 +60,63 @@ class Category
     public function getSluggableFields()
     {
         return [ 'name' ];
+    }
+
+    /**
+     * Add subcategory
+     *
+     * @param \AppBundle\Entity\SubCategory $subcategory
+     *
+     * @return Category
+     */
+    public function addSubcategory(\AppBundle\Entity\SubCategory $subcategory)
+    {
+        $this->subcategories[] = $subcategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove subcategory
+     *
+     * @param \AppBundle\Entity\SubCategory $subcategory
+     */
+    public function removeSubcategory(\AppBundle\Entity\SubCategory $subcategory)
+    {
+        $this->subcategories->removeElement($subcategory);
+    }
+
+    /**
+     * Get subcategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSubcategories()
+    {
+        return $this->subcategories;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     *
+     * @return Category
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

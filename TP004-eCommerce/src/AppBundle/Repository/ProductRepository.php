@@ -10,4 +10,81 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getProductsBySubCategory($locale, $slug) {
+
+        $results = $this
+            ->createQueryBuilder('product')
+            ->join('product.translations','translations')
+            ->join('product.subcategories', 'subcategories')
+            ->join('subcategories.translations', 'subcategoriestranslation')
+
+            ->where('translations.locale = :locale')
+
+            ->andWhere('subcategoriestranslation.slug = :slug')
+
+            ->setParameters([
+                'locale' => $locale,
+                'slug' => $slug
+            ])
+
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
+    public function getRandomProducts($max, $category = null, $subcategory = null) {
+
+        $results = $this
+            ->createQueryBuilder('product')
+            ->join('product.translations','translations')
+            ->orderBy('RAND()')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
+    public function getOneProduct($locale, $slug) {
+
+        $results = $this
+            ->createQueryBuilder('product')
+            ->join('product.translations','translations')
+            ->where('translations.slug = :slug')
+            ->andWhere('translations.locale = :locale')
+            ->setParameters([
+                'slug' => $slug,
+                'locale' => $locale
+            ])
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $results;
+    }
+
+    public function searchProductBy($locale, $search) {
+
+        $results = $this
+            ->createQueryBuilder('product')
+            ->join('product.translations','translations')
+            ->where('translations.name LIKE :search')
+            ->orWhere('translations.description LIKE :search')
+            ->andWhere('translations.locale = :locale')
+            ->setParameters([
+                'search' => '%'.$search.'%',
+                'locale' => $locale
+            ])
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
 }

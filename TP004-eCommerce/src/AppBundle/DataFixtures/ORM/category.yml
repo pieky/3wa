@@ -1,9 +1,3 @@
 AppBundle\Entity\Category:
-    category_livre:
-        name: Livre
-
-    category_bluray:
-        name: Bluray
-
-    category_musique:
-        name: Musique
+    category{1..3}:
+        isActive: 1

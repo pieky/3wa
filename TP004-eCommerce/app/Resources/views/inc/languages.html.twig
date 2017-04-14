@@ -1,0 +1,23 @@
+<li class="dropdown selector-languages">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <img src="{{ asset('flags/'~ currentLocal ~'.svg') }}" alt="{{ currentLocal | upper }}">
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% for lang in locales %}
+            {#{% set newRouteParams = currentRouteParams | merge( {'_locale' : lang } ) %}
+            <li>
+                <a href="{{ url(currentRoute, newRouteParams) }}">
+                    <img src="{{ asset('flags/'~lang~'.svg') }}" alt="{{ lang | upper }}">
+                    {{ lang | upper }}
+                </a>
+            </li>#}
+            <li>
+                <a href="{{ url('app.homepage.index', { '_locale' : lang } ) }}">
+                    <img src="{{ asset('flags/'~lang~'.svg') }}" alt="{{ lang | upper }}">
+                    {{ lang | upper }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</li>

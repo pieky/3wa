@@ -1,24 +1,18 @@
 AppBundle\Entity\Product:
-    product_livre{1..50}:
-        name: book<current()>
+    product_cat1{1..30}:
         price: <randomFloat(2, 0.01, 999.99)>
         stock: <numberBetween(0, 100)>
-        description: <text()>
         image: <imageUrl(890, 500, 'abstract', true, 'Faker')>
-        subcategories: 2x @subcategory_livre*
+        subcategories: 2x @subcategory_cat1*
 
-    product_bluray{1..50}:
-        name: book<current()>
+    product_cat2{1..30}:
         price: <randomFloat(2, 0.01, 999.99)>
         stock: <numberBetween(0, 100)>
-        description: <text()>
         image: <imageUrl(890, 500, 'abstract', true, 'Faker')>
-        subcategories: 2x @subcategory_bluray
+        subcategories: 2x @subcategory_cat2*
 
-    product_musique{1..50}:
-        name: book<current()>
+    product_cat3{1..30}:
         price: <randomFloat(2, 0.01, 999.99)>
         stock: <numberBetween(0, 100)>
-        description: <text()>
         image: <imageUrl(890, 500, 'abstract', true, 'Faker')>
-        subcategories: 2x @subcategory_musique
+        subcategories: 2x @subcategory_cat3*

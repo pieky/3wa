@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+
+        {% for product in products %}
+            <div class="col-xs-4 product">
+            <img class="img-circle" src="{{ product.image }}" alt="{{ product.price }}">
+            <h2>{{ product.translations[currentLocal].name }}</h2>
+            <p class="description">{{ product.translations[currentLocal].description|truncate(150, true)}}</p>
+            <p><h3>{{ product.price | localizedcurrency('EUR') }}</h3></p>
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

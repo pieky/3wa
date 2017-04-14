@@ -1,0 +1,10 @@
+headers:
+    homepage: accueil
+
+users:
+    new: nouveau compte
+    connection: connexion
+    admin: admin
+
+search:
+    placeholder: rechercher...

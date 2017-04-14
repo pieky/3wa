@@ -1,0 +1,53 @@
+body {
+    padding-top: 5rem;
+    text-align: center;
+}
+
+body .random-products {
+    margin-top: 5rem;
+}
+
+body h2 {
+    margin-bottom: 3rem;
+}
+
+.search-menu {
+    padding: 1rem;
+}
+
+.search-menu .form-inline > div {
+    width: 25rem;
+}
+
+.product {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.product img{
+    width:15rem;
+    height:15rem;
+}
+
+.product p.description {
+    height: 10rem;
+}
+
+.main-product p.description {
+    height: 20rem;
+}
+
+.random-products .product {
+    margin-bottom: 5rem;
+}
+
+.selector-languages img {
+    width:2rem;
+}
+
+#carousel-random-products {
+    width: 35rem;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}

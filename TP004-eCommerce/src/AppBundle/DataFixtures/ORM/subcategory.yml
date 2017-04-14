@@ -1,12 +1,10 @@
 AppBundle\Entity\SubCategory:
-    subcategory_livre{1..8}:
-        name (unique): <randomElement(['Roman', 'Policier', 'Science-fiction', 'Fantastique', 'Epouvante', 'Thriller', 'Historique', 'Autobiographique'])>
-        category: '@category_livre'
+    subcategory_cat1{1..5}:
+        category: '@category1'
 
-    subcategory_bluray{1..8}:
-        name (unique): <randomElement(['Epouvante-Horreur', 'Comédie', 'Action', 'Romance', 'Drame', 'Fantastique', 'Science-fiction', 'Policier'])>
-        category: '@category_bluray'
+    subcategory_cat2{1..5}:
+        category: '@category2'
 
-    subcategory_musique{1..8}:
-        name (unique): <randomElement(['Rock', 'Punk', 'Electro', 'Rap', 'Classique', 'Indie', 'House', 'Soul'])>
-        category: '@category_musique'
+
+    subcategory_cat3{1..5}:
+        category: '@category3'

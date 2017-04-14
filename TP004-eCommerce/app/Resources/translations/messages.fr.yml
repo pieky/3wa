@@ -1,0 +1,14 @@
+test:
+    placeholder: il reste %number% produit
+    plural_simple: "il reste un produit |il reste plusieurs produits"
+    plural_advanced: "{0}il ne reste aucun produit | {1}il reste un produit | [2,Inf]il reste plusieurs produits"
+    longtext_uniline: >
+        fr Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Architecto, aspernatur assumenda consequuntur cumque distinctio
+        doloribus eveniet impedit incidunt molestiae neque nisi odio officia
+        quaerat quis repellendus sapiente sit, tempore ut.
+    longtext_multiline: |
+        fr Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Architecto, aspernatur assumenda consequuntur cumque distinctio
+        doloribus eveniet impedit incidunt molestiae neque nisi odio officia
+        quaerat quis repellendus sapiente sit, tempore ut.

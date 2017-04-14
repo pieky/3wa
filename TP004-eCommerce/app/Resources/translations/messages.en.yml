@@ -1,0 +1,14 @@
+test:
+    placeholder: %number% product left
+    plural_simple: "One product left |Many products left"
+    plural_advanced: "{0}no product left | {1}one product left | [2,Inf]many products left"
+    longtext_uniline: >
+        en Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Architecto, aspernatur assumenda consequuntur cumque distinctio
+        doloribus eveniet impedit incidunt molestiae neque nisi odio officia
+        quaerat quis repellendus sapiente sit, tempore ut.
+    longtext_multiline: |
+        en Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Architecto, aspernatur assumenda consequuntur cumque distinctio
+        doloribus eveniet impedit incidunt molestiae neque nisi odio officia
+        quaerat quis repellendus sapiente sit, tempore ut.

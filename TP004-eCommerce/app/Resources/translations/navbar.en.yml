@@ -5,6 +5,9 @@ users:
     new: new account
     connection: connection
     admin: admin
+    list: users list
+    logout: logout
 
 search:
+    button: search
     placeholder: search...

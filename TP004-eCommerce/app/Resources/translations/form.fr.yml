@@ -1,0 +1,12 @@
+form:
+    user:
+        username: Nom d'utilisateur
+        password: Mot de passe
+        email: Email
+        login:
+            title: Connectez-vous
+            button: Connexion
+
+        create:
+            title: Création d'un nouveau compte
+            button: Valider

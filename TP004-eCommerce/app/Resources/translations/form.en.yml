@@ -1,0 +1,12 @@
+form:
+    user:
+        username: Username
+        password: Password
+        email: Email
+        login:
+            title: Sign in
+            button: Sign in
+
+        create:
+            title: Create new account
+            button: Validate

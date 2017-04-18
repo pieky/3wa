@@ -23,3 +23,9 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+
+    app.listeners.user:
+        class: AppBundle\Listener\UserListener
+        arguments: ['@security.password_encoder', '@doctrine']
+        tags:
+            - { name : doctrine.orm.entity_listener }

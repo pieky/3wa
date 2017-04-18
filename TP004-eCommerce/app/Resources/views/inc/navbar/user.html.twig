@@ -1,0 +1,38 @@
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li>
+            <a href="{{ url('app.security.login') }}">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                {{ 'users.connection' | trans({}, 'navbar') | capitalize }}
+            </a>
+            {% include 'inc/form/loginxs.html.twig' %}
+        </li>
+        <li role="separator" class="divider"></li>
+        <li>
+            <a href="{{ url('app.account.create') }}">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                {{ 'users.new' | trans({}, 'navbar') | capitalize }}
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{{ url('app.account.index', { 'username' : app.user.username }) }}">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                {{ app.user.username | capitalize }}
+            </a>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li>
+            <a href="{{ url('app.security.logout') }}">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                {{ 'users.logout' | trans({}, 'navbar') | capitalize }}
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</li>

@@ -1,0 +1,8 @@
+user:
+    username:
+        notblank: your username is empty
+    password:
+        notblank: your password is empty
+    email:
+        notblank: your email is empty
+        email: your email is incorrect

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xs-5 col-xs-offset-3">
+
+            <h2>{{ 'form.user.create.title' | trans({}, 'form') }}</h2>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 col-xs-offset-4">
+
+            {{ form_start(form, { 'attr' : { 'novalidate' : 'novalidate' } })  }}
+
+            <p>
+                {{ form_label(form.username, 'form.user.username' | trans({}, 'form') | capitalize ) }}
+                {{ form_widget(form.username) }}
+                {{ form_errors(form.username) }}
+            </p>
+            <p>
+                {{ form_label(form.password, 'form.user.password' | trans({}, 'form') | capitalize ) }}
+                {{ form_widget(form.password) }}
+                {{ form_errors(form.password) }}
+            </p>
+            <p>
+                {{ form_label(form.email, 'form.user.email' | trans({}, 'form') | capitalize  )  }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </p>
+            <p>
+                <button type="submit" class="btn btn-primary btn-block">{{ 'form.user.create.button' | trans({},'form') }}</button>
+            </p>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}

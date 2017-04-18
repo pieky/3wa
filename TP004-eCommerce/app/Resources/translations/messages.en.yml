@@ -12,3 +12,12 @@ test:
         Architecto, aspernatur assumenda consequuntur cumque distinctio
         doloribus eveniet impedit incidunt molestiae neque nisi odio officia
         quaerat quis repellendus sapiente sit, tempore ut.
+
+operation:
+    danger: This action is forbiden
+
+flashMessages:
+    user:
+        add: Your account have been created
+        update: Your account have been updated
+        delete: the account have been deleted

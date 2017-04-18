@@ -5,6 +5,9 @@ users:
     new: nouveau compte
     connection: connexion
     admin: admin
+    list: liste des utilisateurs
+    logout: déconnection
 
 search:
+    button: rechercher
     placeholder: rechercher...

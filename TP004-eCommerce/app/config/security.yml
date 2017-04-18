@@ -25,11 +25,18 @@ security:
             # activate different ways to authenticate
 
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            http_basic: ~
+            # http_basic: ~
             provider: our_db_provider
 
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
-            #form_login: ~
+            form_login:
+                login_path: app.security.login
+                check_path: app.security.login
+                default_target_path: app.admin.homepage.index
+
+            logout:
+                path:   app.security.logout
+                target: app.homepage.index #page d'atterrissage après déconnexion
 
     access_control:
         - { path: ^/(fr|en)/admin, roles: ROLE_ADMIN }

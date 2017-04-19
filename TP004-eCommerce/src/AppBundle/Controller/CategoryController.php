@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends Controller {
 
     /**
-     * @Route("/c-{slug}", name="app.category.index")
+     * @Route("/shop/{slug}", name="app.category.index")
      */
     public function indexAction(Request $request, $slug){
 

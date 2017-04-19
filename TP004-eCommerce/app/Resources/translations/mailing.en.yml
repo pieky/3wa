@@ -1,0 +1,12 @@
+authentification:
+    success:
+        register:
+            subject: Registration to Amazonkiller
+            title: Registration to Amazonkiller
+            subtitle: Welcome %login%
+            text: ENGLISH Registration Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.
+        login:
+            subject: New connection to Amazonkiller
+            title: New connection to Amazonkiller
+            subtitle: Welcome %login%
+            text: ENGLISH Login Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.

@@ -4,10 +4,6 @@
 
     <h2>Admin - User list</h2>
 
-    {% for notice in app.session.flashBag.get('notice') %}
-        <div class="alert alert-success" role="alert">{{ notice | capitalize }}</div>
-    {% endfor %}
-
     <table class="table table-striped">
         <thead>
             <tr>

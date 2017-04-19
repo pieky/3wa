@@ -29,3 +29,9 @@ services:
         arguments: ['@security.password_encoder', '@doctrine']
         tags:
             - { name : doctrine.orm.entity_listener }
+
+    app.subscriber.authentication:
+        class: AppBundle\Subscriber\AuthenticationSubscriber
+        arguments: ['@mailer','%contact_mail%', '@translator.default', '@twig', '@session', '@router']
+        tags:
+            - { name : kernel.event_subscriber }

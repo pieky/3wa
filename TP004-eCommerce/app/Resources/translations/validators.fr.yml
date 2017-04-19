@@ -6,3 +6,4 @@ user:
     email:
         notblank: votre email est vide
         email: votre email est incorrect
+        placeholder: email

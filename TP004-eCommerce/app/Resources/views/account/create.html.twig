@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-5 col-xs-offset-3">
 
-            <h2>{{ 'form.user.create.title' | trans({}, 'form') }}</h2>
+            <h2>{{ 'form.user.create.title' | trans({}, 'form') | capitalize }}</h2>
 
         </div>
     </div>
@@ -31,7 +31,7 @@
                 {{ form_errors(form.email) }}
             </p>
             <p>
-                <button type="submit" class="btn btn-primary btn-block">{{ 'form.user.create.button' | trans({},'form') }}</button>
+                <button type="submit" class="btn btn-primary btn-block">{{ 'form.user.create.button' | trans({},'form') | capitalize }}</button>
             </p>
 
             {{ form_end(form) }}

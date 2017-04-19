@@ -1,12 +1,17 @@
 form:
     user:
-        username: Username
-        password: Password
-        email: Email
+        username: username
+        password: password
+        email: email
         login:
-            title: Sign in
-            button: Sign in
+            title: sign in
+            forgot: forgot ?
+            button: sign in
 
         create:
-            title: Create new account
-            button: Validate
+            title: create new account
+            button: validate
+
+        passwordReset:
+            title: forgotten password
+            button: reset password

@@ -5,8 +5,13 @@ form:
         email: Email
         login:
             title: Connectez-vous
+            forgot: oublié ?
             button: Connexion
 
         create:
             title: Création d'un nouveau compte
             button: Valider
+
+        passwordReset:
+            title: mot de passe oublié
+            button: réinitialiser le mot de passe

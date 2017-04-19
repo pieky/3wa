@@ -19,6 +19,8 @@
             <div class="row">
                 <div class="col-xs-12">
 
+                    {% include 'inc/flashmessage.html.twig' %}
+
                     {% block body %}{% endblock %}
 
                 </div>
@@ -27,11 +29,7 @@
 
         <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script>
-            $('#carousel-random-products').carousel({
-                interval: 2000
-            })
-        </script>
+        <script src="{{ asset('js/amazon-like.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

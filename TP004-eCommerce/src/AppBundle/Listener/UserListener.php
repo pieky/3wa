@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: wamobi10
- * Date: 18/04/17
- * Time: 15:04
- */
 
 namespace AppBundle\Listener;
 

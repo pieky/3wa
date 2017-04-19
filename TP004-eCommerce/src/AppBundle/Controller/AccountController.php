@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\PasswordResetType;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,5 +95,31 @@ class AccountController extends Controller
         return $this->render('account/index.html.twig', [
             'user' => $user
         ]);
+    }
+
+    /**
+     * @Route("/account/password/reset", name="app.account.passwordReset")
+     */
+    public function passwordResetAction(Request $request){
+
+        $request->getSession()->remove('auth_number_failure');
+
+        //classe du formulaire
+        $formType = PasswordResetType::class;
+
+        //formulaire
+        $form = $this->createForm($formType);
+        $form->handleRequest($request);
+
+        //formulaire valide
+        if($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            exit(dump($data));
+        }
+
+        return $this->render('account/passwordReset.html.twig', [
+            'form' => $form->createView()
+        ]);
+
     }
 }

@@ -1,0 +1,8 @@
+<div class="notification-alert col-xs-3">
+{% for notice in app.session.flashBag.get('notice') %}
+    <div class="alert alert-success text-left" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+        {{ notice }}
+    </div>
+{% endfor %}
+</div>

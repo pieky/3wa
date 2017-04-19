@@ -89,4 +89,17 @@ body .random-products {
 .alert {
     text-align: center;
 }
+
+/************************************************************/
+
+.notification-alert {
+    position: fixed;
+    top: 6rem;
+    right: 5rem;
+}
+
+.notification-alert .alert {
+    text-align: left;
+}
+
 /************************************************************/

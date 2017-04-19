@@ -1,11 +1,11 @@
 <form class="login-menu-xs" action="{{ url('app.security.login') }}" method="POST">
     <div class="form-group">
-        <input type="text" id="username" name="_username" class="form-control" placeholder="{{ 'form.user.username' | trans({},'form') }}"/>
+        <input type="text" id="username" name="_username" class="form-control" placeholder="{{ 'form.user.username' | trans({},'form') | capitalize }}"/>
     </div>
     <div class="form-group">
-        <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'form.user.password' | trans({},'form') }}"/>
+        <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'form.user.password' | trans({},'form') | capitalize }}"/>
     </div>
     <div class="form-group text-right">
-        <button class="btn btn-xs btn-primary" type="submit">{{ 'form.user.login.button' | trans({}, 'form') }}</button>
+        <button class="btn btn-xs btn-primary" type="submit">{{ 'form.user.login.button' | trans({}, 'form') | capitalize }}</button>
     </div>
 </form>

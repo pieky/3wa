@@ -39,7 +39,7 @@ class UserType extends AbstractType
                         'message' => 'user.email.notblank'
                     ]),
                     new Email([
-                        'message' => 'user.email.notblank',
+                        'message' => 'user.email.email',
                         'checkHost' => true,
                         'checkMX' => true
                     ])

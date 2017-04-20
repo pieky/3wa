@@ -22,4 +22,14 @@ class UserTokenRepository extends \Doctrine\ORM\EntityRepository {
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findUserTokenByEmail($email) {
+        return $this->createQueryBuilder('userToken')
+            ->where('userToken.email = :email')
+            ->setParameters([
+                'email' => $email
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

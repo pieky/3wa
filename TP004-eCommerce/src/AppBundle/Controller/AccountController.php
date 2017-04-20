@@ -108,6 +108,7 @@ class AccountController extends Controller
 
         $request->getSession()->remove('auth_number_failure');
         $doctrine = $this->getDoctrine();
+        $em = $this->getDoctrine()->getManager();
         $translator = $this->get('translator.default');
 
         //classe du formulaire
@@ -125,6 +126,12 @@ class AccountController extends Controller
 
             $email = $data['email'];
             $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
+            $userToken = $doctrine->getRepository('AppBundle:UserToken')->findUserTokenByEmail($email);
+
+            if($userToken){
+                $em->remove($userToken);
+                $em->flush();
+            }
 
             if($user) {
                 $userToken = new UserToken();
@@ -132,7 +139,6 @@ class AccountController extends Controller
                 $userToken->setToken($token);
                 $userToken->setExpirationDate($expirationDate);
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($userToken);
                 $em->flush();
             }

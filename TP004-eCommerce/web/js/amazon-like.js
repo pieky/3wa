@@ -3,7 +3,7 @@ $(function() {
         interval: 2000
     });
 
-    $(".notification-alert").delay(1500).slideUp("slow", function(){
+    $(".notification-alert").delay(2500).slideUp("slow", function(){
         $(this).remove();
     });
 

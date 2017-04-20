@@ -12,7 +12,6 @@ class UserTokenRepository extends \Doctrine\ORM\EntityRepository {
 
     public function findUserTokenByEmailToken($email, $token) {
         return $this->createQueryBuilder('userToken')
-            ->select('userToken.expirationDate')
             ->where('userToken.email = :email')
             ->andWhere('userToken.token = :token')
             ->setParameters([

@@ -161,37 +161,39 @@ class AccountController extends Controller
         $dateNow = new \DateTime();
 
         $userToken = $doctrine->getRepository('AppBundle:UserToken')->findUserTokenByEmailToken($email, $token);
-        $expirationDate = $userToken['expirationDate'];
 
-        if($userToken && $expirationDate > $dateNow){
-            $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
+        if($userToken){
+            $expirationDate = $userToken->getExpirationDate();
+            if($expirationDate > $dateNow) {
+                $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
 
-            $formType = PasswordResetType::class;
-            $form = $this->createForm($formType);
-            $form->handleRequest($request);
+                $formType = PasswordResetType::class;
+                $form = $this->createForm($formType);
+                $form->handleRequest($request);
 
-            if($form->isSubmitted() && $form->isValid()){
-                $data = $form->getData();
+                if($form->isSubmitted() && $form->isValid()){
+                    $data = $form->getData();
 
-                if($data['password'] === $data['password_confirm']){
+                    if($data['password'] === $data['password_confirm']){
 
-                    $passwordEncrypted = $this->get('security.password_encoder')->encodePassword($user, $data['password']);
-                    $user->setPassword($passwordEncrypted);
+                        $passwordEncrypted = $this->get('security.password_encoder')->encodePassword($user, $data['password']);
+                        $user->setPassword($passwordEncrypted);
 
-                    $em->persist($user);
-                    $em->remove($userToken);
+                        $em->persist($user);
+                        $em->remove($userToken);
 
-                    $em->flush();
+                        $em->flush();
 
-                    $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.reset'));
+                        $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.reset'));
 
-                    return $this->redirectToRoute('app.security.login');
+                        return $this->redirectToRoute('app.security.login');
+                    }
                 }
-            }
 
-            return $this->render('account/password.reset.html.twig', [
-                'form' => $form->createView()
-            ]);
+                return $this->render('account/password.reset.html.twig', [
+                    'form' => $form->createView()
+                ]);
+            }
         }
 
         $this->addFlash('error', $translator->trans('flashMessages.user.password.reset.invalid'));

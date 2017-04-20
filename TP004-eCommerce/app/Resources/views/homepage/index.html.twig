@@ -52,7 +52,7 @@
                 <div class="carousel-inner" role="listbox">
                     {% for product in randomProducts %}
                         <div class="item {% if loop.first %} active {% endif %}">
-                            <img src="{{ product.image }}" alt="{{ product.price }}">
+                            <img src="{{ product.image }}" alt="{{ product.price }}" class="img-responsive">
                             <div class="carousel-caption">
                                 {{ product.translations[currentLocal].name }}
                             </div>

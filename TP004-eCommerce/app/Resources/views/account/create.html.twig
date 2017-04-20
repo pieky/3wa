@@ -17,17 +17,17 @@
 
             <p>
                 {{ form_label(form.username, 'form.user.username' | trans({}, 'form') | capitalize ) }}
-                {{ form_widget(form.username) }}
+                {{ form_widget(form.username, { 'attr' : { 'placeholder' : 'form.user.username' | trans({},'form') | capitalize }}) }}
                 {{ form_errors(form.username) }}
             </p>
             <p>
                 {{ form_label(form.password, 'form.user.password' | trans({}, 'form') | capitalize ) }}
-                {{ form_widget(form.password) }}
+                {{ form_widget(form.password, { 'attr' : { 'placeholder' : 'form.user.password' | trans({},'form') | capitalize  }}) }}
                 {{ form_errors(form.password) }}
             </p>
             <p>
                 {{ form_label(form.email, 'form.user.email' | trans({}, 'form') | capitalize  )  }}
-                {{ form_widget(form.email) }}
+                {{ form_widget(form.email, { 'attr' : { 'placeholder' : 'form.user.email' | trans({},'form') | capitalize }})  }}
                 {{ form_errors(form.email) }}
             </p>
             <p>

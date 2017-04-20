@@ -3,11 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserToken;
+use AppBundle\Form\PasswordFormType;
 use AppBundle\Form\PasswordResetType;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AccountController extends Controller
 {
@@ -30,22 +33,6 @@ class AccountController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
 
-            /*
-             * TRAITEMENT DS LE LISTENER
-             *
-             * // encoder password
-            $passwordEncoder = $this->get('security.password_encoder');
-            $passwordEncrypted = $passwordEncoder->encodePassword($data, $data->getPassword());
-            $data->setPassword($passwordEncrypted);
-
-            // selection du rôle
-            $role = $rcRole->findOneBy([
-                'name' => 'ROLE_USER'
-            ]);
-
-            // assigner le rôle selectionné
-            $id ? null : $data->addRole($role);*/
-
             // créer l'user
             $em->persist($data);
             $em->flush();
@@ -58,7 +45,10 @@ class AccountController extends Controller
             $this->addFlash('notice', $msg);
 
             //redirection
-            return $this->redirectToRoute('app.security.login');
+            if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('app.security.login');
+            }
+            return $this->redirectToRoute('app.admin.user.index');
         }
 
         return $this->render('account/create.html.twig', [
@@ -71,18 +61,22 @@ class AccountController extends Controller
      */
     public function deleteAction($id){
 
-        $doctrine = $this->getDoctrine();
-        $em = $doctrine->getManager();
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $doctrine = $this->getDoctrine();
+            $em = $doctrine->getManager();
 
-        $entity = $doctrine->getRepository('AppBundle:User')->find($id);
+            $entity = $doctrine->getRepository('AppBundle:User')->find($id);
 
-        $em->remove($entity);
-        $em->flush();
+            $em->remove($entity);
+            $em->flush();
 
-        $translator = $this->get('translator.default');
-        $this->addFlash('notice', $translator->trans('flashMessages.user.delete'));
+            $translator = $this->get('translator.default');
+            $this->addFlash('notice', $translator->trans('flashMessages.user.delete'));
 
-        return $this->redirectToRoute('app.admin.user.index');
+            return $this->redirectToRoute('app.admin.user.index');
+        }
+
+        return $this->redirectToRoute('app.homepage.index');
     }
 
     /**
@@ -90,22 +84,34 @@ class AccountController extends Controller
      */
     public function indexAction($username) {
 
+        $translator = $this->get('translator.default');
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->loadUserByUsername($username);
 
+        //if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if($this->getUser() === $user) {
+            return $this->render('account/index.html.twig', [
+                'user' => $user
+            ]);
+        }
+
+        $this->addFlash('error',$translator->trans('operation.danger'));
+
         return $this->render('account/index.html.twig', [
-            'user' => $user
+            'user' => $this->getUser()
         ]);
     }
 
     /**
-     * @Route("/account/password/reset", name="app.account.passwordReset")
+     * @Route("/account/password/form", name="app.account.password.form")
      */
-    public function passwordResetAction(Request $request){
+    public function passwordFormAction(Request $request){
 
         $request->getSession()->remove('auth_number_failure');
+        $doctrine = $this->getDoctrine();
+        $translator = $this->get('translator.default');
 
         //classe du formulaire
-        $formType = PasswordResetType::class;
+        $formType = PasswordFormType::class;
 
         //formulaire
         $form = $this->createForm($formType);
@@ -114,12 +120,75 @@ class AccountController extends Controller
         //formulaire valide
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
-            exit(dump($data));
+            $token = $this->get('app.service.string.utils')->generateToken(16);
+            $expirationDate = new \DateTime('tomorrow');
+
+            $email = $data['email'];
+            $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
+
+            if($user) {
+                $userToken = new UserToken();
+                $userToken->setEmail($email);
+                $userToken->setToken($token);
+                $userToken->setExpirationDate($expirationDate);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($userToken);
+                $em->flush();
+            }
+            $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.ask'));
         }
 
-        return $this->render('account/passwordReset.html.twig', [
+        return $this->render('account/password.form.html.twig', [
             'form' => $form->createView()
         ]);
+    }
 
+    /**
+     * @Route("/account/password/reset/{email}/{token}", name="app.security.password.reset")
+     */
+    public function passwordResetAction(Request $request, $email, $token) {
+
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+        $translator = $this->get('translator.default');
+        $dateNow = new \DateTime();
+
+        $userToken = $doctrine->getRepository('AppBundle:UserToken')->findUserTokenByEmailToken($email, $token);
+        $expirationDate = $userToken['expirationDate'];
+
+        if($userToken && $expirationDate > $dateNow){
+            $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
+
+            $formType = PasswordResetType::class;
+            $form = $this->createForm($formType);
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+                $data = $form->getData();
+
+                if($data['password'] === $data['password_confirm']){
+
+                    $passwordEncrypted = $this->get('security.password_encoder')->encodePassword($user, $data['password']);
+                    $user->setPassword($passwordEncrypted);
+
+                    $em->persist($user);
+                    $em->remove($userToken);
+
+                    $em->flush();
+
+                    $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.reset'));
+
+                    return $this->redirectToRoute('app.security.login');
+                }
+            }
+
+            return $this->render('account/password.reset.html.twig', [
+                'form' => $form->createView()
+            ]);
+        }
+
+        $this->addFlash('error', $translator->trans('flashMessages.user.password.reset.invalid'));
+        return $this->redirectToRoute('app.account.password.form');
     }
 }

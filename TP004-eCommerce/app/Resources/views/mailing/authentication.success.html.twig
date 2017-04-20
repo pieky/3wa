@@ -1398,7 +1398,7 @@
                                         <table>
                                             <tr>
                                                 <th>
-                                                    <h1 class="text-center">{{ 'authentification.success.login.title' | trans({}, 'mailing') }}</h1>
+                                                    <h1 class="text-center">{{ 'authentification.success.login.title' | trans({}, 'mailing') | capitalize }}</h1>
                                                 </th>
                                                 <th class="expander"></th>
                                             </tr>
@@ -1429,7 +1429,6 @@
                                                         </tr>
                                                         </tbody>
                                                     </table>
-                                                    <center data-parsed=""> <img src="http://lorempixel.com/400/200/abstract/" align="center" class="float-center"> </center>
                                                     <table class="spacer">
                                                         <tbody>
                                                         <tr>
@@ -1437,7 +1436,7 @@
                                                         </tr>
                                                         </tbody>
                                                     </table>
-                                                    <h4>{{ 'authentification.success.login.subtitle' | trans({ '%login%' : username }, 'mailing') }}</h4>
+                                                    <h4>{{ 'authentification.success.login.subtitle' | trans({ '%login%' : username }, 'mailing') | capitalize }}</h4>
                                                     <p>{{ 'authentification.success.login.text' | trans({}, 'mailing') }}</p>
                                                 </th>
                                                 <th class="expander"></th>

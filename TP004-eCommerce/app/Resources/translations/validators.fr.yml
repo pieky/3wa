@@ -3,6 +3,8 @@ user:
         notblank: votre nom d'utilisateur est vide
     password:
         notblank: votre mot de passe est vide
+    password_confirm:
+        notblank: votre mot de passe de confirmation est vide
     email:
         notblank: votre email est vide
         email: votre email est incorrect

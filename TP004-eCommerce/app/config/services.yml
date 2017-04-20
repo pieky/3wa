@@ -30,8 +30,17 @@ services:
         tags:
             - { name : doctrine.orm.entity_listener }
 
+    app.listeners.user.token:
+        class: AppBundle\Listener\UserTokenListener
+        arguments: ['%contact_mail%','@translator.default','@doctrine','@mailer', '@twig', '@router']
+        tags:
+            - { name : doctrine.orm.entity_listener }
+
     app.subscriber.authentication:
         class: AppBundle\Subscriber\AuthenticationSubscriber
         arguments: ['@mailer','%contact_mail%', '@translator.default', '@twig', '@session', '@router']
         tags:
             - { name : kernel.event_subscriber }
+
+    app.service.string.utils:
+        class: AppBundle\Service\StringUtilsService

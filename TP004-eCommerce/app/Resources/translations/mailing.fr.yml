@@ -10,3 +10,10 @@ authentification:
             title: Nouvelle connexion sur Amazonkiller
             subtitle: Bonjour %login%
             text: FRANÇAIS Login Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.
+
+password:
+    reset:
+        subject: Votre lien de réinitialisation de mot de passe est prêt
+        title: Vous avez oublié votre mot de passe ?
+        subtitle: Cela arrive %login% ;) Cliquez sur le lien ci-dessous pour reinitialiser votre mot de passe.
+        button: Reinitialiser votre mot de passe

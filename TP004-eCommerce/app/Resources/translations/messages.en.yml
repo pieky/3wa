@@ -22,3 +22,8 @@ flashMessages:
         update: Your account have been updated
         delete: The account have been deleted
         connectionFailure: Forgotten password ? Choose a new one ;)
+        password:
+            reset:
+                reset: Your password has been modified, please try to login.
+                ask: We just send an email to the specified address.
+                invalid: Reset link is invalid

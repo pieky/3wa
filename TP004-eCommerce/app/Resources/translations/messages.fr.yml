@@ -22,3 +22,8 @@ flashMessages:
         update: Votre compte a été mis à jour
         delete: Le compte a été supprimé
         connectionFailure: Mot de passe oublié ? Choisissez-en un nouveau ;)
+        password:
+            reset:
+                reset: Votre mot de passe vient d'être modifié, Vous pouvez vous connecter.
+                ask: Nous venons d'envoyer un email à l'adresse renseignée.
+                invalid: Le lien de réinitialisation est invalide

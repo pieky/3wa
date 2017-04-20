@@ -47,4 +47,5 @@ class UserListener {
         $entity->addRole($role);
         $entity->setLastConnection(new \DateTime());
     }
+
 }

@@ -1,17 +1,19 @@
 form:
     user:
-        username: Nom d'utilisateur
-        password: Mot de passe
-        email: Email
+        username: nom d'utilisateur
+        password: mot de passe
+        password_confirm: confirmation de mot de passe
+        email: email
         login:
-            title: Connectez-vous
+            title: connectez-vous
             forgot: oublié ?
             button: Connexion
 
         create:
-            title: Création d'un nouveau compte
+            title: création d'un nouveau compte
             button: Valider
 
-        passwordReset:
+    password:
+        reset:
             title: mot de passe oublié
             button: réinitialiser le mot de passe

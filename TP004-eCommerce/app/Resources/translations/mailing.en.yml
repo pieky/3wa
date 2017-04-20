@@ -10,3 +10,10 @@ authentification:
             title: New connection to Amazonkiller
             subtitle: Welcome %login%
             text: ENGLISH Login Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.
+
+password:
+    reset:
+        subject: Your password resest link is ready
+        title: Forgot Your Password?
+        subtitle: It happens %login% ;) Click the link below to reset your password.
+        button: Reset your password

@@ -2,6 +2,7 @@ form:
     user:
         username: username
         password: password
+        password_confirm: password confirmation
         email: email
         login:
             title: sign in
@@ -12,6 +13,7 @@ form:
             title: create new account
             button: validate
 
-        passwordReset:
+    password:
+        reset:
             title: forgotten password
             button: reset password

@@ -4,14 +4,12 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PasswordResetType extends AbstractType
+class PasswordFormType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -19,23 +17,21 @@ class PasswordResetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('password', PasswordType::class, [
+            ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'user.password.notblank'
-                    ])
-                ]
-            ])
-            ->add('password_confirm', PasswordType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'user.password_confirm.notblank'
+                        'message' => 'user.email.notblank'
+                    ]),
+                    new Email([
+                        'message' => 'user.email.notblank',
+                        'checkHost' => true,
+                        'checkMX' => true
                     ])
                 ]
             ])
         ;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -51,7 +47,7 @@ class PasswordResetType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_password_reset';
+        return 'appbundle_password_form';
     }
 
 

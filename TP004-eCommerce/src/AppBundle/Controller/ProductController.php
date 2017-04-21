@@ -12,22 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class ProductController
+ * @package AppBundle\Controller
+ */
 class ProductController extends Controller{
-
-    /**
-     * @Route("/c-{category}/sc-{subcategory}/p-{product}", name="app.product.index")
-     */
-    public function indexAction(Request $request, $category, $subcategory, $product) {
-
-        $locale = $request->getLocale();
-        $product = $this->getDoctrine()->getRepository('AppBundle:Product')->getOneProduct($locale, $product);
-
-        return $this->render('product/index.html.twig', [
-            'product' => $product,
-            'category' => $category,
-            'subcategory' => $subcategory
-        ]);
-    }
 
     /**
      * @Route("/search", name="app.product.search")
@@ -45,4 +34,18 @@ class ProductController extends Controller{
 
     }
 
+    /**
+     * @Route("/shop/{category}/{subcategory}/{product}", name="app.product.index")
+     */
+    public function indexAction(Request $request, $category, $subcategory, $product) {
+
+        $locale = $request->getLocale();
+        $product = $this->getDoctrine()->getRepository('AppBundle:Product')->getOneProduct($locale, $product);
+
+        return $this->render('product/index.html.twig', [
+            'product' => $product,
+            'category' => $category,
+            'subcategory' => $subcategory
+        ]);
+    }
 }

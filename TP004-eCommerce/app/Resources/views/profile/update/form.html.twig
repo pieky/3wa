@@ -1,0 +1,41 @@
+{% extends 'profile/homepage/index.html.twig' %}
+
+{% block profile_title %}
+    {{ 'form.user.update.title' | trans({}, 'form') | capitalize }} -
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-3">
+            {{ form_start(form, { 'attr' : { 'novalidate' : 'novalidate' } })  }}
+
+            <p>
+                {{ form_label(form.address, 'form.user.address' | trans({}, 'form') | capitalize  )  }}
+                {{ form_widget(form.address, { 'attr' : { 'placeholder' : 'form.user.address' | trans({},'form') | capitalize }})  }}
+                {{ form_errors(form.address) }}
+            </p>
+            <p>
+                {{ form_label(form.zipcode, 'form.user.zipcode' | trans({}, 'form') | capitalize  )  }}
+                {{ form_widget(form.zipcode, { 'attr' : { 'placeholder' : 'form.user.zipcode' | trans({},'form') | capitalize }})  }}
+                {{ form_errors(form.zipcode) }}
+            </p>
+            <p>
+                {{ form_label(form.city, 'form.user.city' | trans({}, 'form') | capitalize  )  }}
+                {{ form_widget(form.city, { 'attr' : { 'placeholder' : 'form.user.city' | trans({},'form') | capitalize }})  }}
+                {{ form_errors(form.city) }}
+            </p>
+            <p>
+                {{ form_label(form.country, 'form.user.country' | trans({}, 'form') | capitalize  )  }}
+                {{ form_widget(form.country, { 'attr' : { 'placeholder' : 'form.user.country' | trans({},'form') | capitalize }})  }}
+                {{ form_errors(form.country) }}
+            </p>
+            <p>
+                <button type="submit" class="btn btn-primary btn-block">{{ 'form.user.create.button' | trans({},'form') | capitalize }}</button>
+            </p>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

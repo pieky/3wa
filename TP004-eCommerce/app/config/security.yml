@@ -32,7 +32,7 @@ security:
             form_login:
                 login_path: app.security.login
                 check_path: app.security.login
-                default_target_path: app.admin.homepage.index
+                default_target_path: app.security.redirect.by.role
 
             logout:
                 path:   app.security.logout
@@ -40,6 +40,7 @@ security:
 
     access_control:
         - { path: ^/(fr|en)/admin, roles: ROLE_ADMIN }
+        - { path: ^/(fr|en)/profile, roles: ROLE_USER }
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

@@ -4,6 +4,10 @@ form:
         password: password
         password_confirm: password confirmation
         email: email
+        address: address
+        zipcode: zip code
+        city: city
+        country: country
         login:
             title: sign in
             forgot: forgot ?
@@ -12,6 +16,10 @@ form:
         create:
             title: create new account
             button: validate
+
+        update:
+            title: edit your account
+            button: edit
 
     password:
         reset:

@@ -1,14 +1,24 @@
 <div class="notification-alert col-xs-3">
-{% for notice in app.session.flashBag.get('notice') %}
-    <div class="alert alert-success text-left" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        {{ notice }}
-    </div>
-{% endfor %}
-{% for error in app.session.flashBag.get('error') %}
-    <div class="alert alert-danger text-left" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-        {{ error }}
-    </div>
-{% endfor %}
+
+    {% for notice in app.session.flashBag.get('notice') %}
+        <div class="alert alert-success text-left" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ notice }}
+        </div>
+    {% endfor %}
+
+    {% for error in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger text-left" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ error }}
+        </div>
+    {% endfor %}
+
+    {% for warning in app.session.flashBag.get('warning') %}
+        <div class="alert alert-warning text-left" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{ warning }}
+        </div>
+    {% endfor %}
+
 </div>

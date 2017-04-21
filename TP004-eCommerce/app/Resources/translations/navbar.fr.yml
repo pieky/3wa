@@ -3,6 +3,7 @@ headers:
 
 users:
     new: nouveau compte
+    edit: modifier votre compte
     connection: connexion
     admin: admin
     list: liste des utilisateurs

@@ -21,12 +21,4 @@ class UserRepository  extends EntityRepository implements UserLoaderInterface {
             ->getOneOrNullResult();
     }
 
-
-    public function findUserByEmail($email){
-        return $this->createQueryBuilder('u')
-            ->where('u.email = :email')
-            ->setParameter('email', $email)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }

@@ -28,9 +28,15 @@
         </li>
         {% else %}
         <li>
-            <a href="{{ url('app.account.index', { 'username' : app.user.username }) }}">
+            <a href="{{ url('app.profile.homepage.index') }}">
                 <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                 {{ app.user.username | capitalize }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('app.profile.update.form') }}">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+                {{ 'users.edit' | trans({}, 'navbar') | capitalize }}
             </a>
         </li>
         <li role="separator" class="divider"></li>

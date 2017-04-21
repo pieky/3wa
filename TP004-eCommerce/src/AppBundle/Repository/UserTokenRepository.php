@@ -10,25 +10,4 @@ namespace AppBundle\Repository;
  */
 class UserTokenRepository extends \Doctrine\ORM\EntityRepository {
 
-    public function findUserTokenByEmailToken($email, $token) {
-        return $this->createQueryBuilder('userToken')
-            ->where('userToken.email = :email')
-            ->andWhere('userToken.token = :token')
-            ->setParameters([
-                'email' => $email,
-                'token' => $token
-            ])
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
-    public function findUserTokenByEmail($email) {
-        return $this->createQueryBuilder('userToken')
-            ->where('userToken.email = :email')
-            ->setParameters([
-                'email' => $email
-            ])
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }

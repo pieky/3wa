@@ -16,15 +16,13 @@ class AccountController extends Controller
 {
     /**
      * @Route("/account/create", name="app.account.create", defaults={"id"= null})
-     * @Route("/account/edit/{id}", name="app.account.edit", requirements={"id" = "\d+"})
      */
     public function createAction(Request $request, $id) {
 
         $doctrine = $this->getDoctrine();
-        $rcUser = $doctrine->getRepository('AppBundle:User');
         $em = $doctrine->getManager();
 
-        $entity = $id ? $rcUser->find($id) : new User();
+        $entity = new User();
         $entityType = UserType::class;
 
         $form = $this->createForm($entityType, $entity);
@@ -41,14 +39,13 @@ class AccountController extends Controller
             $translator = $this->get('translator.default');
 
             // flash msg
-            $msg = $id ? $translator->trans('flashMessages.user.update') : $translator->trans('flashMessages.user.add');
-            $this->addFlash('notice', $msg);
+            $this->addFlash('notice', $translator->trans('flashMessages.user.add'));
 
             //redirection
             if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                 return $this->redirectToRoute('app.security.login');
             }
-            return $this->redirectToRoute('app.admin.user.index');
+            return $this->redirectToRoute('app.admin.homepage.index');
         }
 
         return $this->render('account/create.html.twig', [
@@ -73,32 +70,10 @@ class AccountController extends Controller
             $translator = $this->get('translator.default');
             $this->addFlash('notice', $translator->trans('flashMessages.user.delete'));
 
-            return $this->redirectToRoute('app.admin.user.index');
+            return $this->redirectToRoute('app.admin.homepage.index');
         }
 
         return $this->redirectToRoute('app.homepage.index');
-    }
-
-    /**
-     * @Route("/account/{username}", name="app.account.index")
-     */
-    public function indexAction($username) {
-
-        $translator = $this->get('translator.default');
-        $user = $this->getDoctrine()->getRepository('AppBundle:User')->loadUserByUsername($username);
-
-        //if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-        if($this->getUser() === $user) {
-            return $this->render('account/index.html.twig', [
-                'user' => $user
-            ]);
-        }
-
-        $this->addFlash('error',$translator->trans('operation.danger'));
-
-        return $this->render('account/index.html.twig', [
-            'user' => $this->getUser()
-        ]);
     }
 
     /**
@@ -122,18 +97,27 @@ class AccountController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
             $token = $this->get('app.service.string.utils')->generateToken(16);
-            $expirationDate = new \DateTime('tomorrow');
+            $dateNow = new \DateTime();
+            $expirationDate = new \DateTime();
+            $expirationDate->add(new \DateInterval('P0Y0DT2H0M'));
 
             $email = $data['email'];
-            $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
-            $userToken = $doctrine->getRepository('AppBundle:UserToken')->findUserTokenByEmail($email);
+            $user = $doctrine->getRepository('AppBundle:User')->findOneBy(['email' => $email]);
+            $userToken = $doctrine->getRepository('AppBundle:UserToken')->findOneBy(['email' => $email]);
 
             if($userToken){
-                $em->remove($userToken);
-                $em->flush();
+                if($dateNow < $userToken->getExpirationDate()){
+                    $this->addFlash('warning', $translator->trans('flashMessages.user.password.reset.exist'));
+                }
+                else
+                {
+                    $em->remove($userToken);
+                    $em->flush();
+                    $userToken = null;
+                }
             }
 
-            if($user) {
+            if($user and $userToken === null) {
                 $userToken = new UserToken();
                 $userToken->setEmail($email);
                 $userToken->setToken($token);
@@ -141,8 +125,13 @@ class AccountController extends Controller
 
                 $em->persist($userToken);
                 $em->flush();
+
+                $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.ask'));
             }
-            $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.ask'));
+
+            if(!$user) {
+                $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.ask'));
+            }
         }
 
         return $this->render('account/password.form.html.twig', [
@@ -160,12 +149,15 @@ class AccountController extends Controller
         $translator = $this->get('translator.default');
         $dateNow = new \DateTime();
 
-        $userToken = $doctrine->getRepository('AppBundle:UserToken')->findUserTokenByEmailToken($email, $token);
+        $userToken = $doctrine->getRepository('AppBundle:UserToken')->findOneBy([
+            'email' => $email,
+            'token' => $token
+        ]);
 
         if($userToken){
             $expirationDate = $userToken->getExpirationDate();
             if($expirationDate > $dateNow) {
-                $user = $doctrine->getRepository('AppBundle:User')->findUserByEmail($email);
+                $user = $doctrine->getRepository('AppBundle:User')->findOneBy(['email' => $email]);
 
                 $formType = PasswordResetType::class;
                 $form = $this->createForm($formType);

@@ -9,3 +9,11 @@ user:
         notblank: your email is empty
         email: your email is incorrect
         placeholder: email
+    address:
+        notblank: your address is empty
+    zipcode:
+        notblank: your zip code is empty
+    city:
+        notblank: your city is empty
+    country:
+        notblank: your country is empty

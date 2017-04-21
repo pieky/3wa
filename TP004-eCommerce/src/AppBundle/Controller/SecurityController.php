@@ -40,4 +40,17 @@ class SecurityController extends Controller
     public function logoutAction(Request $request){
 
     }
+
+    /**
+     * @Route("/redirect-by-role", name="app.security.redirect.by.role")
+     */
+    public function redirectByRoleAction(){
+        $roles = $this->getUser()->getRoles();
+
+        if(in_array('ROLE_ADMIN', $roles)){
+            return $this->redirectToRoute('app.admin.homepage.index');
+        } elseif (in_array('ROLE_USER', $roles)){
+            return $this->redirectToRoute('app.profile.homepage.index');
+        }
+    }
 }

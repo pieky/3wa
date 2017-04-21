@@ -7,15 +7,8 @@
         <ul class="dropdown-menu">
             <li>
                 <a href="{{ url('app.admin.homepage.index') }}">
-                    <i class="fa fa-lock" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
                     {{ 'users.admin' | trans({}, 'navbar') | capitalize }}
-                </a>
-            </li>
-            <li role="separator" class="divider"></li>
-            <li>
-                <a href="{{ url('app.admin.user.index') }}">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    {{ 'users.list' | trans({}, 'navbar') | capitalize }}
                 </a>
             </li>
         </ul>

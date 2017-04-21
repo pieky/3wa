@@ -1,4 +1,6 @@
 $(function() {
+    $('[data-toggle="popover"]').popover();
+
     $('#carousel-random-products').carousel({
         interval: 2000
     });

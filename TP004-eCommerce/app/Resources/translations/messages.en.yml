@@ -27,3 +27,4 @@ flashMessages:
                 reset: Your password has been modified, please try to login.
                 ask: We just send an email to the specified address.
                 invalid: Reset link is invalid
+                exist: We already send you a reset link

@@ -37,8 +37,11 @@ class UserTokenListener {
     public function prePersist(UserToken $entity, LifecycleEventArgs $args) {
 
         if($entity instanceof UserToken){
-            $user = $this->doctrine->getRepository('AppBundle:User')->findUserByEmail($entity->getEmail());
-            $link = $this->router->generate('app.security.password.reset', ['email' => $entity->getEmail(), 'token' => $entity->getToken()], UrlGeneratorInterface::ABSOLUTE_URL);
+            $user = $this->doctrine->getRepository('AppBundle:User')->findOneBy([ 'email' => $entity->getEmail()]);
+            $link = $this->router->generate('app.security.password.reset', [
+                'email' => $entity->getEmail(),
+                'token' => $entity->getToken()
+            ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             $message = \Swift_Message::newInstance()
                     ->setFrom($this->contactMail)

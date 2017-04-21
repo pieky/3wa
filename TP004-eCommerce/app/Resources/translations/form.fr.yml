@@ -4,14 +4,22 @@ form:
         password: mot de passe
         password_confirm: confirmation de mot de passe
         email: email
+        address: adresse
+        zipcode: code postal
+        city: ville
+        country: pays
         login:
             title: connectez-vous
             forgot: oublié ?
-            button: Connexion
+            button: connexion
 
         create:
             title: création d'un nouveau compte
-            button: Valider
+            button: valider
+
+        update:
+            title: modification du compte
+            button: valider les modifications
 
     password:
         reset:

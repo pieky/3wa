@@ -13,10 +13,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class CategoryController
+ * @package AppBundle\Controller
+ * @Route("/shop")
+ */
 class CategoryController extends Controller {
 
     /**
-     * @Route("/shop/{slug}", name="app.category.index")
+     * @Route("/{slug}", name="app.category.index")
      */
     public function indexAction(Request $request, $slug){
 

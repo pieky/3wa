@@ -2,7 +2,9 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Subscriber\UserFormSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -45,7 +47,39 @@ class UserType extends AbstractType
                     ])
                 ]
             ])
+            ->add('address', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'user.address.notblank'
+                    ])
+                ]
+            ])
+            ->add('zipcode', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'user.zipcode.notblank'
+                    ])
+                ]
+            ])
+            ->add('city', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'user.city.notblank'
+                    ])
+                ]
+            ])
+            ->add('country', CountryType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'user.country.notblank'
+                    ])
+                ],
+                'placeholder' => ''
+            ])
         ;
+
+        //souscripteur du formulaire
+        $builder->addEventSubscriber(new UserFormSubscriber());
     }
     
     /**

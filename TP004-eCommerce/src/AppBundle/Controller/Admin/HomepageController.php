@@ -17,7 +17,15 @@ class HomepageController extends Controller {
      */
     public function indexAction() {
 
-        return $this->render('admin/homepage/index.html.twig');
+        $dateNow = new \DateTime();
+
+        $users = $this->getDoctrine()->getRepository('AppBundle:User')->findAll();
+        $usersTokens = $this->getDoctrine()->getRepository('AppBundle:UserToken')->findAll();
+        return $this->render('admin/homepage/index.html.twig', [
+            'users' => $users,
+            'usersTokens' => $usersTokens,
+            'dateNow' => $dateNow
+        ]);
 
     }
 }

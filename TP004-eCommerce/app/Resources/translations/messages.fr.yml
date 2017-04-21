@@ -27,3 +27,4 @@ flashMessages:
                 reset: Votre mot de passe vient d'être modifié, Vous pouvez vous connecter.
                 ask: Nous venons d'envoyer un email à l'adresse renseignée.
                 invalid: Le lien de réinitialisation est invalide
+                exist: Nous vous avons déjà envoyé un lien de réinitialisation

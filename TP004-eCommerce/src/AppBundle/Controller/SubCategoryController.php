@@ -7,10 +7,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class SubCategoryController
+ * @package AppBundle\Controller
+ * @Route("/shop")
+ */
 class SubCategoryController extends Controller{
 
     /**
-     * @Route("/c-{category}/sc-{subcategory}", name="app.subcategory.index")
+     * @Route("/{category}/{subcategory}", name="app.subcategory.index")
      */
     public function indexAction(Request $request, $category, $subcategory){
 

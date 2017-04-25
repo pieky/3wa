@@ -7,8 +7,20 @@
         <ul class="dropdown-menu">
             <li>
                 <a href="{{ url('app.admin.homepage.index') }}">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    {{ 'users.admin' | trans({}, 'navbar') | capitalize }}
+                    <i class="fa fa-group" aria-hidden="true"></i>
+                    {{ 'admin.user.navTitle' | trans() | capitalize }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('app.admin.category.index') }}">
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                    {{ 'admin.category.navTitle' | trans() | capitalize }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('app.admin.subcategory.index') }}">
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                    {{ 'admin.subcategory.navTitle' | trans() | capitalize }}
                 </a>
             </li>
         </ul>

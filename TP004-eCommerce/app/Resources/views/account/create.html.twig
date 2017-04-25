@@ -21,9 +21,14 @@
                 {{ form_errors(form.username) }}
             </p>
             <p>
-                {{ form_label(form.password, 'form.user.password' | trans({}, 'form') | capitalize ) }}
-                {{ form_widget(form.password, { 'attr' : { 'placeholder' : 'form.user.password' | trans({},'form') | capitalize  }}) }}
-                {{ form_errors(form.password) }}
+                {{ form_label(form.password.first, 'form.user.password' | trans({}, 'form') | capitalize ) }}
+                {{ form_widget(form.password.first, { 'attr' : { 'placeholder' : 'form.user.password' | trans({},'form') | capitalize  }}) }}
+                {{ form_errors(form.password.first) }}
+            </p>
+            <p>
+                {{ form_label(form.password.second, 'form.user.password_confirm' | trans({}, 'form') | capitalize ) }}
+                {{ form_widget(form.password.second, { 'attr' : { 'placeholder' : 'form.user.password_confirm' | trans({},'form') | capitalize  }}) }}
+                {{ form_errors(form.password.second) }}
             </p>
             <p>
                 {{ form_label(form.email, 'form.user.email' | trans({}, 'form') | capitalize  )  }}

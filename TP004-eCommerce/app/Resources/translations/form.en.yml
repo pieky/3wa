@@ -20,8 +20,36 @@ form:
         update:
             title: edit your account
             button: edit
+            password:
+                title: change password
 
     password:
         reset:
             title: forgotten password
             button: reset password
+
+    category:
+        title: manage categories
+        name: name
+        isactive: is active ?
+        field:
+            name: language
+        add:
+            title: add new category
+            button: create new category
+        update:
+            title: edit this category
+            button: update category
+
+    subcategory:
+        title: manage subcategories
+        name: name
+        isactive: is active ?
+        field:
+            name: language
+        add:
+            title: add new subcategory
+            button: create new subcategory
+        update:
+            title: edit this subcategory
+            button: update subcategory

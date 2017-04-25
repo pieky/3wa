@@ -5,6 +5,7 @@ user:
         notblank: votre mot de passe est vide
     password_confirm:
         notblank: votre mot de passe de confirmation est vide
+        match: les mots de passe doivent correspondre
     email:
         notblank: votre email est vide
         email: votre email est incorrect

@@ -31,4 +31,47 @@ class SubCategoryRepository extends \Doctrine\ORM\EntityRepository{
         return $results;
     }
 
+    public function getAllSubCategoriesByLocale($locale){
+
+        $results = $this
+            ->createQueryBuilder('sub_category')
+            ->join('sub_category.translations','translations')
+            ->where('translations.locale = :locale')
+
+            ->setParameters([
+                'locale' => $locale
+            ])
+
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
+    public function getAllSubCategoriesCategoryByLocale($locale){
+
+        $results = $this
+            ->createQueryBuilder('sub_category')
+            ->select('category_translation.name, category.id')
+            ->join('sub_category.translations','translations')
+
+            ->join('sub_category.category','category')
+            ->join('category.translations','category_translation')
+
+            ->where('translations.locale = :locale')
+
+            ->setParameters([
+                'locale' => $locale
+            ])
+
+            ->groupBy('category.id')
+
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
 }

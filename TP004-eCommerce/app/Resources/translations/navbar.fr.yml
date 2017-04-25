@@ -4,11 +4,15 @@ headers:
 users:
     new: nouveau compte
     edit: modifier votre compte
+    password: modifier mot de passe
     connection: connexion
-    admin: admin
     list: liste des utilisateurs
     logout: déconnection
 
 search:
     button: rechercher
     placeholder: rechercher...
+
+admin:
+    homepage: admin
+    category: categorie

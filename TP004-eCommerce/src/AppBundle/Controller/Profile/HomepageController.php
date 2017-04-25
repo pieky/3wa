@@ -29,8 +29,6 @@ class HomepageController extends Controller {
 
         $this->addFlash('error',$translator->trans('operation.danger'));
 
-        return $this->render('profile/homepage/index.html.twig', [
-            'user' => $user
-        ]);
+        return $this->render('profile/homepage/index.html.twig');
     }
 }

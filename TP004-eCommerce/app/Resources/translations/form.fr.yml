@@ -20,8 +20,36 @@ form:
         update:
             title: modification du compte
             button: valider les modifications
+            password:
+                title: modification du mot de passe
 
     password:
         reset:
             title: mot de passe oublié
             button: réinitialiser le mot de passe
+
+    category:
+        title: gestion des catégories
+        name: nom
+        isactive: catégorie activé ?
+        field:
+            name: langue
+        add:
+            title: ajouter une nouvelle catégorie
+            button: créer une nouvelle catégorie
+        update:
+            title: modifier la catégorie
+            button: mettre à jour la catégorie
+
+    subcategory:
+        title: gestion des sous-catégories
+        name: nom
+        isactive: sous-catégorie activé ?
+        field:
+            name: langue
+        add:
+            title: ajouter une nouvelle sous-catégorie
+            button: créer une nouvelle sous-catégorie
+        update:
+            title: modifier la sous-catégorie
+            button: mettre à jour la sous-catégorie

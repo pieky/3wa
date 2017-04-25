@@ -13,18 +13,47 @@ test:
         doloribus eveniet impedit incidunt molestiae neque nisi odio officia
         quaerat quis repellendus sapiente sit, tempore ut.
 
+#--------------------------------------------------------------------------------------------------
+
+
 operation:
     danger: cette action est interdite
 
 flashMessages:
     user:
-        add: Votre compte a été créé
-        update: Votre compte a été mis à jour
-        delete: Le compte a été supprimé
-        connectionFailure: Mot de passe oublié ? Choisissez-en un nouveau ;)
+        add: votre compte a été créé
+        update: votre compte a été mis à jour
+        delete: le compte a été supprimé
+        connectionFailure: mot de passe oublié ? Choisissez-en un nouveau ;)
         password:
             reset:
-                reset: Votre mot de passe vient d'être modifié, Vous pouvez vous connecter.
-                ask: Nous venons d'envoyer un email à l'adresse renseignée.
-                invalid: Le lien de réinitialisation est invalide
-                exist: Nous vous avons déjà envoyé un lien de réinitialisation
+                reset: votre mot de passe vient d'être modifié, Vous pouvez vous connecter.
+                ask: nous venons d'envoyer un email à l'adresse renseignée.
+                invalid: le lien de réinitialisation est invalide
+                exist: nous vous avons déjà envoyé un lien de réinitialisation
+    category:
+        add: catégorie créée
+        udpate: catégorie mise à jour
+        delete: catégorie supprimée
+    subcategory:
+        add: sous-catégorie créée
+        udpate: sous-catégorie mise à jour
+        delete: sous-catégorie supprimée
+
+
+
+admin:
+    user:
+        navTitle: gestion utilisateurs
+        title: gestion des comptes utilisateurs
+
+    category:
+        navTitle: gestion des catégories
+        title: gestion des catégories
+
+    subcategory:
+        navTitle: gestion des sous-catégories
+        title: gestion des sous-catégories
+
+profile:
+    title: gestion du compte

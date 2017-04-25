@@ -8,6 +8,13 @@ services:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
 
+#------------------------------------------------------------------------------------------------------------------
+
+# Pour savoir quel tag name utiliser :
+#   -> http://symfony.com/doc/current/reference/dic_tags.html
+
+#------------------------------------------------------------------------------------------------------------------
+
     app.twig.app_extension:
         class: AppBundle\Twig\AppExtension
         arguments: ['@doctrine', '@twig', '@request_stack']
@@ -24,23 +31,81 @@ services:
         tags:
             - { name: twig.extension }
 
+#------------------------------------------------------------------------------------------------------------------
+
     app.listeners.user:
         class: AppBundle\Listener\UserListener
         arguments: ['@security.password_encoder', '@doctrine']
         tags:
-            - { name : doctrine.orm.entity_listener }
+            - { name: doctrine.orm.entity_listener }
 
     app.listeners.user.token:
         class: AppBundle\Listener\UserTokenListener
         arguments: ['%contact_mail%','@translator.default','@doctrine','@mailer', '@twig', '@router']
         tags:
-            - { name : doctrine.orm.entity_listener }
+            - { name: doctrine.orm.entity_listener }
+
+#------------------------------------------------------------------------------------------------------------------
 
     app.subscriber.authentication:
         class: AppBundle\Subscriber\AuthenticationSubscriber
         arguments: ['@mailer','%contact_mail%', '@translator.default', '@twig', '@session', '@router']
         tags:
-            - { name : kernel.event_subscriber }
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.account.events:
+        class: AppBundle\Subscriber\AccountEvensSubscriber
+        arguments: ['@mailer','%contact_mail%', '@translator.default', '@twig', '@router', '@request_stack']
+        tags:
+            - { name: kernel.event_subscriber }
+
+#    app.subscriber.user.form:
+#        class: AppBundle\Subscriber\UserFormSubscriber
+#        arguments: ['@router']
+#        tags:
+#            - { name: kernel.event_subscriber }
+
+#    app.subscriber.category:
+#        class: AppBundle\Subscriber\CategorySubscriber
+#        arguments: ['%locales%','@doctrine']
+#        tags:
+#            - { name: kernel.event_subscriber }
+
+#------------------------------------------------------------------------------------------------------------------
 
     app.service.string.utils:
         class: AppBundle\Service\StringUtilsService
+
+#------------------------------------------------------------------------------------------------------------------
+
+    app.form.user:
+        class: AppBundle\Form\UserType
+        arguments: ['@request_stack','@security.password_encoder']
+        tags:
+            - { name: form.type }
+
+    app.form.category:
+        class: AppBundle\Form\CategoryType
+        arguments: ['%locales%']
+        tags:
+            - { name: form.type }
+
+    app.form.category.translation:
+        class: AppBundle\Form\CategoryTranslationType
+        arguments: ['%locales%','@doctrine','@request_stack']
+        tags:
+            - { name: form.type }
+
+    app.form.subcategory:
+        class: AppBundle\Form\SubCategoryType
+        arguments: ['%locales%']
+        tags:
+            - { name: form.type }
+
+    app.form.subcategory.translation:
+        class: AppBundle\Form\SubCategoryTranslationType
+        arguments: ['%locales%','@doctrine','@request_stack']
+        tags:
+            - { name: form.type }
+
+#------------------------------------------------------------------------------------------------------------------

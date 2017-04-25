@@ -5,6 +5,7 @@ user:
         notblank: your password is empty
     password_confirm:
         notblank: your confirmation password is empty
+        match: password fields must match
     email:
         notblank: your email is empty
         email: your email is incorrect

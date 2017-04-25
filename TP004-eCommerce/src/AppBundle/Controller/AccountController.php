@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserToken;
+use AppBundle\Event\Account\AccountEvent;
+use AppBundle\Event\Account\AccountEvents;
 use AppBundle\Form\PasswordFormType;
 use AppBundle\Form\PasswordResetType;
 use AppBundle\Form\UserType;
@@ -31,17 +33,30 @@ class AccountController extends Controller
         if($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
 
-            // créer l'user
             $em->persist($data);
             $em->flush();
 
-            // translate
-            $translator = $this->get('translator.default');
+            /*
+             * Création et lancement d'un event
+             */
+                //declencher l'event AccountEvent::CREATE
+                $event = new AccountEvent();
+                $event->setEmail($data->getEmail());
+                $event->setUsername($data->getUsername());
 
-            // flash msg
+                //service fournis par symfony. permet de déclencher l'événement
+                $eventDispatcher = $this->get('event_dispatcher');
+
+                //on emet l'événement
+                $eventDispatcher->dispatch(AccountEvents::CREATE, $event);
+            /*
+             * Fin
+             */
+
+
+            $translator = $this->get('translator.default');
             $this->addFlash('notice', $translator->trans('flashMessages.user.add'));
 
-            //redirection
             if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
                 return $this->redirectToRoute('app.security.login');
             }
@@ -77,9 +92,9 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("/account/password/form", name="app.account.password.form")
+     * @Route("/account/password/ask", name="app.account.password.ask")
      */
-    public function passwordFormAction(Request $request){
+    public function passwordAskAction(Request $request){
 
         $request->getSession()->remove('auth_number_failure');
         $doctrine = $this->getDoctrine();
@@ -134,7 +149,7 @@ class AccountController extends Controller
             }
         }
 
-        return $this->render('account/password.form.html.twig', [
+        return $this->render('account/password.ask.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -166,20 +181,17 @@ class AccountController extends Controller
                 if($form->isSubmitted() && $form->isValid()){
                     $data = $form->getData();
 
-                    if($data['password'] === $data['password_confirm']){
+                    $passwordEncrypted = $this->get('security.password_encoder')->encodePassword($user, $data['password']);
+                    $user->setPassword($passwordEncrypted);
 
-                        $passwordEncrypted = $this->get('security.password_encoder')->encodePassword($user, $data['password']);
-                        $user->setPassword($passwordEncrypted);
+                    $em->persist($user);
+                    $em->remove($userToken);
 
-                        $em->persist($user);
-                        $em->remove($userToken);
+                    $em->flush();
 
-                        $em->flush();
+                    $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.reset'));
 
-                        $this->addFlash('notice', $translator->trans('flashMessages.user.password.reset.reset'));
-
-                        return $this->redirectToRoute('app.security.login');
-                    }
+                    return $this->redirectToRoute('app.security.login');
                 }
 
                 return $this->render('account/password.reset.html.twig', [
@@ -189,6 +201,6 @@ class AccountController extends Controller
         }
 
         $this->addFlash('error', $translator->trans('flashMessages.user.password.reset.invalid'));
-        return $this->redirectToRoute('app.account.password.form');
+        return $this->redirectToRoute('app.account.password.ask');
     }
 }

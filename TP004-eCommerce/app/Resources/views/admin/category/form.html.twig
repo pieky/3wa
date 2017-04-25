@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-9 col-xs-offset-1">
+            <div class="page-header">
+                <h1>Admin <small>{{ isNew ? 'form.category.add.title' | trans({}, 'form') | capitalize : 'form.category.update.title' | trans({}, 'form') | capitalize }}
+                    </small></h1>
+            </div>
+
+           {# <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                {% for lang in locales %}
+                <li role="presentation" {% if loop.first %} class="active" {% endif %}><a href="#locale-{{ lang }}" aria-controls="locale-{{ lang }}" role="tab" data-toggle="tab">{{ lang | upper }}</a></li>
+                {% endfor %}
+            </ul>
+
+            {{ form_start(form, { 'attr' : { 'novalidate' : 'novalidate' } })  }}
+                <div class="tab-content">
+                    {% for lang in locales %}
+
+                        <div role="tabpanel" class="tab-pane {% if loop.first %} active {% endif %}" id="locale-{{ lang }}">
+                            <p>
+                                {{ form_label(form.translations['name_'~lang], 'form.category.name' | trans({}, 'form') | capitalize ) }}
+                                {{ form_widget(form.translations['name_'~lang], { 'attr' : { 'placeholder' : 'form.category.name' | trans({},'form') | capitalize }}) }}
+                                {{ form_errors(form.translations['name_'~lang]) }}
+                            </p>
+                        </div>
+                    {% endfor %}
+                    <hr>
+
+                    <div class="text-right">
+                        <p>
+                            {{ form_label(form.isActive, 'form.category.isactive' | trans({}, 'form') | capitalize ) }}
+                            {{ form_widget(form.isActive) }}
+                            {{ form_errors(form.isActive) }}
+                        </p>
+                        <p>
+                            <button type="submit" class="btn btn-success btn-sm">
+                                {{ isNew ? 'form.category.add.button' | trans({}, 'form') | capitalize : 'form.category.update.button' | trans({}, 'form') | capitalize }}
+                            </button>
+                        </p>
+                    </div>
+
+                </div>
+            {{ form_end(form) }}#}
+
+            {{ form_start(form, { 'attr' : { 'novalidate' : 'novalidate' } })  }}
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                {% for lang in locales %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="#locale-{{ lang }}">
+                            <h4 class="panel-title">
+                                <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#locale-{{ lang }}" aria-expanded="true" aria-controls="collapseOne">
+                                    {{ 'form.category.field.name' | trans({},'form') | capitalize }} - {{ lang | upper }}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="locale-{{ lang }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="#locale-{{ lang }}">
+                            <div class="panel-body">
+                                {{ form_label(form.translations['name_'~lang], 'form.category.name' | trans({}, 'form') | capitalize ) }}
+                                {{ form_widget(form.translations['name_'~lang], { 'attr' : { 'placeholder' : 'form.category.name' | trans({},'form') | capitalize }}) }}
+                                {{ form_errors(form.translations['name_'~lang]) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="text-right">
+                <p>
+                    {{ form_label(form.isActive, 'form.category.isactive' | trans({}, 'form') | capitalize ) }}
+                    {{ form_widget(form.isActive) }}
+                    {{ form_errors(form.isActive) }}
+                </p>
+                <p>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        {{ isNew ? 'form.category.add.button' | trans({}, 'form') | capitalize : 'form.category.update.button' | trans({}, 'form') | capitalize }}
+                    </button>
+                </p>
+            </div>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

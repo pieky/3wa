@@ -1,10 +1,5 @@
 authentification:
     success:
-        register:
-            subject: Registration to Amazonkiller
-            title: Registration to Amazonkiller
-            subtitle: Welcome %login%
-            text: ENGLISH Registration Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.
         login:
             subject: New connection to Amazonkiller
             title: New connection to Amazonkiller
@@ -17,3 +12,14 @@ password:
         title: Forgot Your Password?
         subtitle: It happens %login% ;) Click the link below to reset your password.
         button: Reset your password
+        success:
+            subject: Update password notification
+            title: update password
+            subtitle: hello %login%, today the %date%, you just change your password ;)
+
+account:
+    register:
+        subject: Registration to Amazonkiller
+        title: Registration to Amazonkiller
+        subtitle: Welcome %login%
+        text: ENGLISH Registration Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.

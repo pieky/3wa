@@ -1,10 +1,5 @@
 authentification:
     success:
-        register:
-            subject: Inscription à Amazonkiller
-            title: Inscription à Amazonkiller
-            subtitle: Bienvenue %login%
-            text: FRANÇAIS Inscription Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.
         login:
             subject: Nouvelle connexion sur Amazonkiller
             title: Nouvelle connexion sur Amazonkiller
@@ -17,3 +12,14 @@ password:
         title: Vous avez oublié votre mot de passe ?
         subtitle: Cela arrive %login% ;) Cliquez sur le lien ci-dessous pour reinitialiser votre mot de passe.
         button: Reinitialiser votre mot de passe
+        success:
+            subject: Notification de modification de mot de passe
+            title: modification de mot de passe
+            subtitle: bonjour %login%, aujourd'hui le %date%, vous avez changé votre mot de passe ;)
+
+account:
+    register:
+        subject: Inscription à Amazonkiller
+        title: Inscription à Amazonkiller
+        subtitle: Bienvenue %login%
+        text: FRANÇAIS Inscription Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque culpa vel architecto, perspiciatis eius cum autem quidem, sunt consequuntur, impedit dolor vitae illum nobis sint nihil aliquid? Assumenda, amet, officia.

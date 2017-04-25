@@ -4,7 +4,9 @@
 
    <div class="row">
       <div class="col-xs-9 col-xs-offset-1">
-         <h2>Admin</h2>
+         <div class="page-header">
+            <h1>Admin <small> {{ 'admin.user.title' | trans() }}</small></h1>
+         </div>
 
          <!-- Nav tabs -->
          <ul class="nav nav-tabs" role="tablist">
@@ -15,10 +17,10 @@
          <!-- Tab panes -->
          <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
-               {% include 'admin/inc/users.list.html.twig' %}
+               {% include 'admin/inc/user/users.list.html.twig' %}
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">
-                {% include 'admin/inc/users.tokens.list.html.twig' %}
+                {% include 'admin/inc/user/users.tokens.list.html.twig' %}
             </div>
          </div>
 

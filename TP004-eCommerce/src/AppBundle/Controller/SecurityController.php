@@ -21,7 +21,7 @@ class SecurityController extends Controller
     public function loginAction(Request $request){
         if($request->getSession()->get('auth_number_failure') > 2) {
             $request->getSession()->remove('_security.last_error');
-            return $this->redirectToRoute('app.account.password.form');
+            return $this->redirectToRoute('app.account.password.ask');
         }
 
         $authenticationUtils = $this->get('security.authentication_utils');

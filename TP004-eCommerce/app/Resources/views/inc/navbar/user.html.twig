@@ -14,7 +14,7 @@
         </li>
         <li role="separator" class="divider"></li>
         <li>
-            <a href="{{ url('app.account.password.form') }}">
+            <a href="{{ url('app.account.password.ask') }}">
                 <i class="fa fa-undo" aria-hidden="true"></i>
                 {{ 'form.password.reset.title' | trans({}, 'form') | capitalize }}
             </a>
@@ -37,6 +37,12 @@
             <a href="{{ url('app.profile.update.form') }}">
                 <i class="fa fa-edit" aria-hidden="true"></i>
                 {{ 'users.edit' | trans({}, 'navbar') | capitalize }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('app.profile.update.password') }}">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                {{ 'users.password' | trans({}, 'navbar') | capitalize }}
             </a>
         </li>
         <li role="separator" class="divider"></li>

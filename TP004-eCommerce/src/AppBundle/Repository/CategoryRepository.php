@@ -29,6 +29,45 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository{
         return $results;
     }
 
+    public function get3CategoriesByLocale($locale, $max){
+
+        $results = $this
+            ->createQueryBuilder('category')
+            ->join('category.translations','translations')
+
+            ->where('translations.locale = :locale')
+            ->andWhere('category.isActive = 1')
+            ->setParameters([
+                'locale' => $locale
+            ])
+            ->orderBy('RAND()')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
+    public function getAllCategoriesByLocale($locale){
+
+        $results = $this
+            ->createQueryBuilder('category')
+            ->join('category.translations','translations')
+
+            ->where('translations.locale = :locale')
+
+            ->setParameters([
+                'locale' => $locale
+            ])
+
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $results;
+    }
+
     public function getOneCategoryByLocale($locale, $slug){
 
         $results = $this

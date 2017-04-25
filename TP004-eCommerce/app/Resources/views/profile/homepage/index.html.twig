@@ -2,40 +2,58 @@
 
 {% block body %}
 
-    <h2>{% block profile_title %}{% endblock %}{{ user.username | capitalize }}</h2>
 
     <div class="row">
         <div class="col-xs-2">
             <div class="sidebar-module">
-                <h4>Menu</h4>
-                <ul class="list-unstyled">
-                    <li><a href="{{ url('app.profile.homepage.index') }}">{{ user.username | capitalize  }}</a></li>
-                    <li><a href="{{ url('app.profile.update.form') }}">{{ 'users.edit' | trans({},'navbar') | capitalize }}</a></li>
+                <div class="page-header">
+                    <h3><small>Menu</small></h3>
+                </div>
+                <ul class="list-group text-center">
+                    <li class="list-group-item"><a href="{{ url('app.profile.homepage.index') }}" class="btn btn-primary btn-xs">{{ app.user.username | capitalize  }}</a></li>
+                    <li class="list-group-item"><a href="{{ url('app.profile.update.form') }}" class="btn btn-primary btn-xs">{{ 'users.edit' | trans({},'navbar') | capitalize }}</a></li>
+                    <li class="list-group-item"><a href="{{ url('app.profile.update.password') }}" class="btn btn-primary btn-xs">{{ 'users.password' | trans({},'navbar') | capitalize }}</a></li>
                 </ul>
+
+
+
             </div>
         </div>
 
         <div class="col-xs-10">
+            <div class="page-header">
+                <h4>{{ 'profile.title' | trans() | capitalize }} <small>({{ app.user.username }})</small></h4>
+            </div>
             {% block content %}
-            <div class="well well-sm">
                 <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <img src="http://lorempixel.com/400/200/sports/{{ user.username }}/" alt="" class="img-rounded img-responsive">
-                    </div>
-                    <div class="col-sm-6 col-md-8">
-                        <h4>
-                            <a href="{{ url('app.profile.update.form') }}" class="btn btn-info btn-xs"><i class="fa fa-edit" aria-hidden="true"></i> </a>
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            {{ user.username | capitalize }}
-                        </h4>
-                        <p><i class="fa fa-envelope-o" aria-hidden="true"></i> {{ user.email }}</p>
-                        <p><i class="fa fa-address-card" aria-hidden="true"></i> {{ user.address }}, {{ user.zipcode }}, {{ user.city }},  {{ user.country }}</p>
-                        <hr>
-                        <p><i class="fa fa-history" aria-hidden="true"></i> {{ user.lastConnection|localizeddate('long', 'medium', currentLocal) }}</p>
+                    <div class="col-xs-6 col-xs-offset-2">
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{% block profile_title %}{% endblock %}{{ app.user.username | capitalize }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-sm-6 col-md-4">
+                                    <img src="http://lorempixel.com/400/200/sports/{{ app.user.username }}/" alt="" class="img-rounded img-responsive">
+                                </div>
+                                <div class="col-sm-6 col-md-8">
+                                    <h4>
+                                        <a href="{{ url('app.profile.update.form') }}" class="btn btn-info btn-xs"><i class="fa fa-edit" aria-hidden="true"></i> </a>
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        {{ app.user.username | capitalize }}
+                                    </h4>
+                                    <p><i class="fa fa-envelope-o" aria-hidden="true"></i> {{ app.user.email }}</p>
+                                    <p><i class="fa fa-address-card" aria-hidden="true"></i> {{ app.user.address }}, {{ app.user.zipcode }}, {{ app.user.city }},  {{ app.user.country }}</p>
+                                    <hr>
+                                    <p><i class="fa fa-history" aria-hidden="true"></i> {{ app.user.lastConnection|localizeddate('long', 'medium', currentLocal) }}</p>
+
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
-            </div>
+
             {% endblock %}
         </div>
     </div>

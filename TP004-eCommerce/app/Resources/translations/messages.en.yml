@@ -13,18 +13,47 @@ test:
         doloribus eveniet impedit incidunt molestiae neque nisi odio officia
         quaerat quis repellendus sapiente sit, tempore ut.
 
+#--------------------------------------------------------------------------------------------------
+
+
 operation:
-    danger: This action is forbiden
+    danger: this action is forbiden
 
 flashMessages:
     user:
-        add: Your account have been created
-        update: Your account have been updated
-        delete: The account have been deleted
-        connectionFailure: Forgotten password ? Choose a new one ;)
+        add: your account have been created
+        update: your account have been updated
+        delete: the account have been deleted
+        connectionFailure: forgotten password ? Choose a new one ;)
         password:
             reset:
-                reset: Your password has been modified, please try to login.
-                ask: We just send an email to the specified address.
-                invalid: Reset link is invalid
-                exist: We already send you a reset link
+                reset: your password has been modified, please try to login.
+                ask: we just send an email to the specified address.
+                invalid: invalid reset link
+                exist: we already send you a reset link
+    category:
+        add: create new category
+        udpate: category updated
+        delete: category deleted
+    subcategory:
+        add: create new subcategory
+        udpate: subcategory updated
+        delete: subcategory deleted
+
+
+
+admin:
+    user:
+        navTitle: manage account
+        title: manage account
+
+    category:
+        navTitle: manage category
+        title: manage category
+
+    subcategory:
+        navTitle: manage subcategories
+        title: manage subcategories
+
+profile:
+    title: account Manager

@@ -4,11 +4,15 @@ headers:
 users:
     new: new account
     edit: edit account
+    password: change password
     connection: connection
-    admin: admin
     list: users list
     logout: logout
 
 search:
     button: search
     placeholder: search...
+
+admin:
+    homepage: admin
+    category: category

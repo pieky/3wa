@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class UserTokenRepository extends \Doctrine\ORM\EntityRepository {
 
+    public function userTokenFlushCommand() {
+
+        $result = $this
+            ->getEntityManager()
+            ->createQueryBuilder()
+            ->delete('AppBundle:UserToken', 'userToken')
+            ->where('userToken.expirationDate < :date')
+            ->setParameter('date', new \DateTime('-1 days'))
+            ->getQuery();
+
+        return $result;
+    }
 }

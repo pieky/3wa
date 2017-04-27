@@ -27,8 +27,8 @@ class SubCategorySubscriber implements EventSubscriberInterface {
         $form = $event->getForm();
         $entity = $form->getData();
 
-
         exit(dump($data, $entity));
+
         foreach ($this->locales as $key => $value) {
             $entity->translate($value)->setName($data['translations']["name_$value"]);
         }

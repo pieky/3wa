@@ -18,6 +18,7 @@ test:
 
 operation:
     danger: cette action est interdite
+    beta: Le site est en beta
 
 flashMessages:
     user:
@@ -57,3 +58,9 @@ admin:
 
 profile:
     title: gestion du compte
+
+cart:
+    title: votre panier
+    button:
+        add: ajouter au panier
+        delete: supprimer

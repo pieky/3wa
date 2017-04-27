@@ -3,13 +3,17 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: mysql.yml }
+    - { resource: maintenance.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
     locales: [en, fr]
+    currency: EUR
+    currencies: [EUR, USD, GBP]
     contact_mail: contact@amazonkiller.com
+    contact_admin: admin@amazonkiller.com
 
 framework:
     #esi: ~
@@ -45,6 +49,8 @@ twig:
     globals:
         locale: '%locale%'
         locales: '%locales%'
+        currency: '%currency%'
+        currencies: '%currencies%'
     form_themes: [ 'bootstrap_3_layout.html.twig' ] # fichiers dans >>> vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Forms
 
 # Doctrine Configuration

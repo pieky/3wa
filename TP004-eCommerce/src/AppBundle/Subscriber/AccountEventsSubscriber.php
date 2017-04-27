@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class AccountEvensSubscriber implements EventSubscriberInterface{
+class AccountEventsSubscriber implements EventSubscriberInterface{
 
     private $mailer;
     private $contactMail;

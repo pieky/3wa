@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="page-header">
+            <h1>{{ 'cart.title' | trans() }}</h1>
+        </div>
+
+        <div class="col-xs-12">
+            {{ dump(app.session.get('cart')) }}
+        </div>
+
+    </div>
+
+{% endblock %}

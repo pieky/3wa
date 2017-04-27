@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="row product-home">
+    <div class="row">
         <div class="col-xs-12">
 
             <div class="row">
@@ -20,7 +20,30 @@
                 <div class="col-xs-8">
                     <p class="text-right">{{ product.stock | render_stock }}</p>
                     <p class="text-justify description">{{ product.translations[currentLocal].description }}</p>
-                    <p><h3 class="text-right">{{ product.price | localizedcurrency('EUR') }}</h3></p>
+                    <p>
+                        <div class="col-xs-3 col-xs-offset-9">
+                            <form class="text-right" method="POST" action="{{ url('app.cart.index') }}">
+                                <div class="form-group">
+                                    <h3>{{ product.price | price_convert | localizedcurrency(app.session.get('currency')) }}</h3>
+                                </div>
+                                <div class="form-group ">
+                                    <select class="form-control" name="qte-product">
+                                        {% for i in 1..maxAvailableOrder %}
+                                            <option value="{{ i }}">{{ i }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <input type="hidden" name="product-slug" value="{{ product.translations[currentLocal].slug }}">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ 'cart.button.add' | trans | capitalize }}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </p>
                 </div>
             </div>
 

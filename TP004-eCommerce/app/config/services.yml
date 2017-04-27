@@ -17,7 +17,7 @@ services:
 
     app.twig.app_extension:
         class: AppBundle\Twig\AppExtension
-        arguments: ['@doctrine', '@twig', '@request_stack']
+        arguments: ['@doctrine', '@twig', '@request_stack','@session']
         tags:
             - { name: twig.extension }
 
@@ -54,8 +54,14 @@ services:
             - { name: kernel.event_subscriber }
 
     app.subscriber.account.events:
-        class: AppBundle\Subscriber\AccountEvensSubscriber
+        class: AppBundle\Subscriber\AccountEventsSubscriber
         arguments: ['@mailer','%contact_mail%', '@translator.default', '@twig', '@router', '@request_stack']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.subscriber.kernel.events:
+        class: AppBundle\Subscriber\KernelEventsSubscriber
+        arguments: ['%maintenance%','@twig', '@translator.default']
         tags:
             - { name: kernel.event_subscriber }
 
@@ -75,6 +81,9 @@ services:
 
     app.service.string.utils:
         class: AppBundle\Service\StringUtilsService
+
+    app.product.string.utils:
+        class: AppBundle\Service\ProductUtilsService
 
 #------------------------------------------------------------------------------------------------------------------
 

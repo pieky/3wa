@@ -1,0 +1,40 @@
+<li>
+    <form method="POST" class="currency-form navbar-form navbar-left">
+        <select class="form-control input-xs currency-choice" name="currency-choice" id="currency-choice">
+            {% set currencyActive = app.session.has('currency') ? app.session.get('currency') : 'EUR' %}
+            {% for currency in currencies %}
+            <option value="{{ currency }}"
+                    data-icon="fa fa-{{ currency | lower }}"
+                    {% if app.session.get('currency') == currency %} selected="selected" {% endif %}>
+            </option>
+            {% endfor %}
+        </select>
+    </form>
+</li>
+
+{#
+<li class="dropdown selector-languages">
+    <form action="{{ url('app.ajax.change.currency') }}" method="POST" class="currency-form navbar-form navbar-left">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-eur" aria-hidden="true"></i>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="#" id="EUR">
+                    <i class="fa fa-eur" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="USD">
+                    <i class="fa fa-usd" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="GPB">
+                    <i class="fa fa-gbp" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </form>
+</li>#}

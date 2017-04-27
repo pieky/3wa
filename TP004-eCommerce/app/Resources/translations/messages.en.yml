@@ -18,6 +18,7 @@ test:
 
 operation:
     danger: this action is forbiden
+    beta: The website is currently in beta
 
 flashMessages:
     user:
@@ -57,3 +58,12 @@ admin:
 
 profile:
     title: account Manager
+
+cart:
+    title: shopping Cart
+    button:
+        add: add to cart
+        delete: delete
+    button:
+        add: add to cart
+        delete: delete

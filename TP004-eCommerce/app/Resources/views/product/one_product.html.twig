@@ -2,6 +2,6 @@
     <img class="img-circle" src="{{ product.image }}" alt="{{ product.price }}">
     <h2>{{ product.translations[currentLocal].name }}</h2>
     <p class="description">{{ product.translations[currentLocal].description|truncate(150, true)}}</p>
-    <p><h3>{{ product.price | localizedcurrency('EUR') }}</h3></p>
+    <p><h3>{{ product.price | price_convert | localizedcurrency(app.session.get('currency')) }}</h3></p>
     <p><a class="btn btn-default" href="{{ url('app.product.index', { 'category' : subcategory.category.translations[currentLocal].slug, 'subcategory' : subcategory.translations[currentLocal].slug, 'product' : product.translations[currentLocal].slug }) }}" role="button">{{ 'button.consult' | trans({}, 'button') | capitalize}}</a></p>
 </div>

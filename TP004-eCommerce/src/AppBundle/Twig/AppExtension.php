@@ -3,17 +3,20 @@ namespace AppBundle\Twig;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AppExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface {
 
     private $doctrine;
     private $twig;
     private $request;
+    private $session;
 
-    public function __construct(Registry $doctrine, \Twig_Environment $twig, RequestStack $request){
+    public function __construct(Registry $doctrine, \Twig_Environment $twig, RequestStack $request, Session $session){
         $this->doctrine = $doctrine;
         $this->twig = $twig;
         $this->request = $request->getMasterRequest();
+        $this->session = $session;
     }
 
     public function getGlobals(){
@@ -33,6 +36,7 @@ class AppExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInt
     public function getFilters(){
         return array(
             new \Twig_SimpleFilter('render_stock', [$this, 'renderStock'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFilter('price_convert', [$this, 'priceConvert']),
         );
     }
 
@@ -43,6 +47,18 @@ class AppExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInt
         return $this->twig->render('inc/navbar.html.twig', [
             'categories' => $categories
         ]);
+    }
+
+    public function priceConvert($price){
+
+        $currency = $this->session->get('currency');
+        $rate = $this->doctrine->getRepository('AppBundle:ExchangeRate')->findOneBy(['code' => $currency]);
+
+        if($rate === null){
+            return $price;
+        }else{
+            return $rate->getRate()*$price;
+        }
     }
 
     public function renderStock($stock){

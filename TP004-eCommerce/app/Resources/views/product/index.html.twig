@@ -22,27 +22,26 @@
                     <p class="text-justify description">{{ product.translations[currentLocal].description }}</p>
                     <p>
                         <div class="col-xs-3 col-xs-offset-9">
-                            <form class="text-right" method="POST" action="{{ url('app.cart.index') }}">
+                            <form id="form-add-to-cart" class="text-right" method="POST" action="{{ url('app.cart.index') }}">
                                 <div class="form-group">
                                     <h3>{{ product.price | price_convert | localizedcurrency(app.session.get('currency')) }}</h3>
                                 </div>
                                 <div class="form-group ">
-                                    <select class="form-control" name="qte-product">
+                                    <select class="form-control" name="product-qte">
                                         {% for i in 1..maxAvailableOrder %}
                                             <option value="{{ i }}">{{ i }}</option>
                                         {% endfor %}
                                     </select>
-                                    <input type="hidden" name="product-slug" value="{{ product.translations[currentLocal].slug }}">
+                                    <input type="hidden" name="product-id" value="{{ product.id }}">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">
+                                    <span class="label label-success hidden add-to-cart-succeed"><i class="fa fa-check"></i></span>
+                                    <button type="submit" class="btn btn-primary" value="test">
                                         {{ 'cart.button.add' | trans | capitalize }}
                                     </button>
                                 </div>
                             </form>
                         </div>
-
-
                     </p>
                 </div>
             </div>

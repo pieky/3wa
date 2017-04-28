@@ -37,6 +37,7 @@ security:
             logout:
                 path:   app.security.logout
                 target: app.homepage.index #page d'atterrissage après déconnexion
+                invalidate_session: false
 
     access_control:
         - { path: ^/(fr|en)/admin, roles: ROLE_ADMIN }

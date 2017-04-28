@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -25,9 +26,31 @@ class CartController extends Controller {
      */
     public function indexAction(Request $request){
 
+        $session = $this->get('session');
+        $cart = $session->get('cart');
+        $products = null;
+        $cartTotal = 0;
+        if($cart){
+            foreach ($cart as $id => $qte){
+                $product = $this->get('doctrine')->getRepository('AppBundle:Product')->find($id);
+                $product->orderQte = $qte;
+                $product->orderTotal = $qte*$product->getPrice();
 
+                $cartTotal += $product->orderTotal;
+                $products[] = $product;
+            }
 
-        return $this->render('cart/index.html.twig');
+            return $this->render('cart/index.html.twig',[
+                'products' => $products,
+                'cartTotal' => $cartTotal,
+                'cartEmpty' => false
+            ]);
+        }
+
+        return $this->render('cart/index.html.twig',[
+            'cartEmpty' => true
+        ]);
+
     }
 
     /**
@@ -35,21 +58,11 @@ class CartController extends Controller {
      */
     public function addAction(Request $request){
 
-
-/*        $session = $request->getSession();
-        $cart = $session->get('cart');
-        $cart[] = $slug;
-        $session->set('cart',$cart);*/
-
-        return $this->render('cart/index.html.twig');
-    }
-
-    /**
-     * @Route("/delete", name="app.cart.delete")
-     */
-    public function deleteAction(Request $request){
-
-        return $this->render('cart/index.html.twig');
+        $productQte = $request->request->get('product-qte');
+        $productId = $request->request->get('product-id');
+        $this->get('app.service.cart.utils')->addToCart($productId,$productQte);
+        $response = $request->isXmlHttpRequest() ? new JsonResponse() : $this->redirectToRoute('app.cart.index');
+        return $response;
     }
 
     /**
@@ -57,6 +70,21 @@ class CartController extends Controller {
      */
     public function updateAction(Request $request){
 
-        return $this->render('cart/index.html.twig');
+        $productQte = $request->request->get('product-qte');
+        $productId = $request->request->get('product-id');
+        $this->get('app.service.cart.utils')->updateCart($productId,$productQte);
+        $response = $request->isXmlHttpRequest() ? new JsonResponse() : $this->redirectToRoute('app.cart.index');
+        return $response;
+    }
+
+    /**
+     * @Route("/delete", name="app.cart.delete")
+     */
+    public function deleteAction(Request $request){
+
+        $productId = $request->request->get('product-id');
+        $this->get('app.service.cart.utils')->deleteFromCart($productId);
+        $response = $request->isXmlHttpRequest() ? new JsonResponse() : $this->redirectToRoute('app.cart.index');
+        return $response;
     }
 }

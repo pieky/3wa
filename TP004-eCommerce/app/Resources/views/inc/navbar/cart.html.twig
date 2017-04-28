@@ -1,3 +1,6 @@
-<li>
-    <a href="{{ url('app.cart.index') }}"><i class="fa fa-shopping-cart"></i></a>
+<li id="main-cart-icon">
+    <a href="{{ url('app.cart.index') }}">
+        <span class="badge">{{ app.session.get('cartCount') }}</span>
+        <i class="fa fa-shopping-cart"></i>
+    </a>
 </li>

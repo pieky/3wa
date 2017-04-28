@@ -11,7 +11,7 @@ namespace AppBundle\Service;
 
 class ProductUtilsService{
 
-    public function maxAvailableOrder($stock, $max = 5){
+    public function maxAvailableOrder($stock, $max = 10){
         if($stock < $max) return $stock; else return $max;
     }
 

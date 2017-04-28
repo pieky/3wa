@@ -61,9 +61,16 @@ profile:
 
 cart:
     title: shopping Cart
+    empty: your Shopping Cart is empty
     button:
         add: add to cart
         delete: delete
     button:
         add: add to cart
         delete: delete
+    cart:
+        product: product
+        qte: quantity
+        price: price
+        total: total
+        shopping: continue Shopping

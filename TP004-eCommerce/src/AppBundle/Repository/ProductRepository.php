@@ -36,11 +36,20 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
         return $results;
     }
 
-    public function getRandomProducts($max, $category = null, $subcategory = null) {
+    public function getRandomProducts($locale, $max, $category = null, $subcategory = null) {
 
         $results = $this
             ->createQueryBuilder('product')
-            ->join('product.translations','translations')
+            ->select('product.price, product.id, product.image, trans.name, trans.description, trans.slug, transSubcat.slug As subCatSlug, transCat.slug AS catSlug')
+            ->join('product.translations','trans')
+            ->join('product.subcategories', 'subcat')
+            ->join('subcat.translations','transSubcat')
+            ->join('subcat.category', 'cat')
+            ->join('cat.translations', 'transCat')
+            ->where('trans.locale = :locale')
+            ->setParameters([
+                'locale' => $locale
+            ])
             ->orderBy('RAND()')
             ->setMaxResults($max)
             ->getQuery()
@@ -86,5 +95,4 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $results;
     }
-
 }

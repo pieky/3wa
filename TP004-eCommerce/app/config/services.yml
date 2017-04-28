@@ -61,7 +61,7 @@ services:
 
     app.subscriber.kernel.events:
         class: AppBundle\Subscriber\KernelEventsSubscriber
-        arguments: ['%maintenance%','@twig', '@translator.default']
+        arguments: ['%maintenance%','@twig', '@translator.default','%currency%']
         tags:
             - { name: kernel.event_subscriber }
 
@@ -82,8 +82,12 @@ services:
     app.service.string.utils:
         class: AppBundle\Service\StringUtilsService
 
-    app.product.string.utils:
+    app.service.product.utils:
         class: AppBundle\Service\ProductUtilsService
+
+    app.service.cart.utils:
+        class: AppBundle\Service\CartUtilsService
+        arguments: ['@session', '@translator.default']
 
 #------------------------------------------------------------------------------------------------------------------
 
@@ -107,7 +111,7 @@ services:
 
     app.form.subcategory:
         class: AppBundle\Form\SubCategoryType
-        arguments: ['%locales%']
+        arguments: ['%locales%','@request_stack']
         tags:
             - { name: form.type }
 

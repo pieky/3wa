@@ -16,7 +16,7 @@ class HomepageController extends Controller
         $locale = $request->getLocale();
         $doctrine = $this->getDoctrine();
         $categories = $doctrine->getRepository('AppBundle:Category')->getCategoriesByLocale($locale);
-        $randomProducts = $doctrine->getRepository('AppBundle:Product')->getRandomProducts(3);
+        $randomProducts = $doctrine->getRepository('AppBundle:Product')->getRandomProducts($locale, 3);
 
         return $this->render('homepage/index.html.twig', [
             'categories' => $categories,

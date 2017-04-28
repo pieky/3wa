@@ -18,7 +18,8 @@ class UserTokenRepository extends \Doctrine\ORM\EntityRepository {
             ->delete('AppBundle:UserToken', 'userToken')
             ->where('userToken.expirationDate < :date')
             ->setParameter('date', new \DateTime('-1 days'))
-            ->getQuery();
+            ->getQuery()
+            ->execute();
 
         return $result;
     }

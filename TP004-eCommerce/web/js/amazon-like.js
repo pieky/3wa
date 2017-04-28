@@ -19,27 +19,65 @@ $(function() {
         });
 
         $('#currency-choice').selectpicker();
-
     /* -----------------------------------------------------
      ------ FIN --------------------------------------------
      -----------------------------------------------------*/
 
-    var currencyChoice = $('.currency-choice');
-    currencyChoice.on('change', onChangeCurrencyChoice);
-    function onChangeCurrencyChoice(e){
-        var data = $(this).parent().serialize();
-
+    $('.currency-choice').on('change', function(e) {
+        var form = $(this).parent();
+        var data = form.serialize();
         $.ajax({
             data:data,
             dataType: 'json',
             method: 'post',
-            url: '/fr/ajax/change-currency',
-            success: onSuccessCurrencyChoice
-        })
+            url: '/fr/ajax/change-currency'
+        }).done(function() {
+            form.submit();
+        });
+    });
 
-        $(this).parent().submit();
-    }
+    $('#form-add-to-cart').on('submit', function(e) {
+        e.preventDefault();
+        var data = $(this).serialize();
 
-    function onSuccessCurrencyChoice(data){
-    }
+        $.ajax({
+            data:data,
+            method: 'post',
+            url: '/fr/cart/add'
+        }).done(function () {
+            var succeed = $('.add-to-cart-succeed');
+            if(succeed.hasClass('hidden')) {
+                succeed.removeClass('hidden').delay(1500).fadeOut();
+            } else {
+                succeed.fadeIn().delay(1500).fadeOut();
+            }
+
+        });
+    });
+
+    $('.form-delete-from-cart').on('submit', function(e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+        var id = $(this).children(":first").val();
+        $.ajax({
+            data:data,
+            method: 'post',
+            url: '/fr/cart/delete'
+        }).done(function() {
+            $('#cart-product-'+id).remove();
+        });
+    });
+
+    $('.product-qte').on('change', function(e) {
+        var data = $(this).parent().serialize();
+        $.ajax({
+            data:data,
+            method: 'post',
+            url: '/fr/cart/update'
+        }).done(function() {
+            console.log('ok');
+        });
+    });
+
+
 });

@@ -54,7 +54,7 @@
                         <div class="item {% if loop.first %} active {% endif %}">
                             <img src="{{ product.image }}" alt="{{ product.price }}" class="img-responsive">
                             <div class="carousel-caption">
-                                {{ product.translations[currentLocal].name }}
+                                {{ product.name }}
                             </div>
                         </div>
                     {% endfor %}
@@ -78,8 +78,10 @@
             {% for product in randomProducts %}
             <div class="col-xs-4 product">
                 <img class="img-circle" src="{{ product.image }}" alt="{{ product.price }}">
-                <h2>{{ product.translations[currentLocal].name }}</h2>
-                <p class="description">{{ product.translations[currentLocal].description|truncate(150, true)}}</p>
+                <h2>{{ product.name  | capitalize  }}</h2>
+                <p class="description">{{ product.description|truncate(150, true)}}</p>
+                <p><h3>{{ product.price | price_convert | localizedcurrency(app.session.get('currency')) }}</h3></p>
+                <p><a class="btn btn-default" href="{{ url('app.product.index', { 'category' : product.catSlug,'subcategory' : product.subCatSlug,'product' : product.slug }) }}" role="button">{{ 'button.consult' | trans({}, 'button') | capitalize}}</a></p>
             </div>
             {% endfor %}
         </div>

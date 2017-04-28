@@ -54,6 +54,11 @@ class KernelEventsSubscriber implements EventSubscriberInterface{
         $session = $request->getSession();
         if(!$session->has('cart')){
             $session->set('cart',null);
+            $session->set('cartCount',0);
+        }
+
+        if(!$session->has('currency')){
+            $session->set('currency',null);
         }
     }
 

@@ -4,13 +4,86 @@
 
     <div class="row">
         <div class="page-header">
-            <h1>{{ 'cart.title' | trans() }}</h1>
+            <h1>{{ 'cart.title' | trans | capitalize }}</h1>
         </div>
 
         <div class="col-xs-12">
-            {{ dump(app.session.get('cart')) }}
-        </div>
+            {% if cartEmpty %}
 
+                <h4>{{ 'cart.empty' | trans | capitalize}}</h4>
+
+            {% else %}
+                <table class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th>{{ 'cart.cart.product' | trans | capitalize }}</th>
+                        <th>{{ 'cart.cart.qte' | trans | capitalize }}</th>
+                        <th class="text-center">{{ 'cart.cart.price' | trans | capitalize }}</th>
+                        <th class="text-center">{{ 'cart.cart.total' | trans | capitalize }}</th>
+                        <th class="text-right">
+                            <form action="{{ url('app.cart.index') }}" id="form-refresh-card" method="POST">
+                                <button type="submit" class="btn btn-info btn-xs"><span class="fa fa-refresh"></span></button>
+                            </form>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        {% set alert=null %}
+                        {% if(product.orderQte > product.stock) %}
+                            {% set alert = "class=alert-danger" %}
+                        {% endif %}
+                        <tr {{ alert }} id="cart-product-{{ product.id }}">
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" src="{{ product.image }}" style="width: 72px; height: 72px;"> </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{ product.translations[currentLocal].name | capitalize }}</h4>
+                                        <span>Stock: </span><span class="text-success"><strong>{{ product.stock }}</strong></span>
+                                    </div>
+                                </div></td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <form class="form-update-cart" method="POST" action="{{ url('app.cart.update') }}">
+                                    <input type="hidden" name="product-id" value="{{ product.id }}">
+                                    <input type="hidden" name="product-price" value="{{ product.price }}">
+                                    <input type="number" class="form-control input-sm product-qte" name="product-qte" value="{{ product.orderQte }}">
+                                </form>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>{{ product.price | price_convert | localizedcurrency(app.session.get('currency')) }}</strong></td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>{{ product.orderTotal | price_convert |localizedcurrency(app.session.get('currency')) }}</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <form class="form-delete-from-cart" method="POST" action="{{ url('app.cart.delete') }}">
+                                    <input type="hidden" name="product-id" value="{{ product.id }}">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <span class="fa fa-remove"></span> {{ 'cart.button.delete' | trans | capitalize }}
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><h3>{{ 'cart.cart.total' | trans | capitalize }}</h3></td>
+                        <td class="text-right"><h3><strong>{{ cartTotal | price_convert | localizedcurrency(app.session.get('currency')) }}</strong></h3></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>
+                            <a href="{{ url('app.homepage.index') }}" type="button" class="btn btn-default">
+                                <span class="fa fa-shopping-cart"></span> {{ 'cart.cart.shopping' | trans | capitalize }}
+                            </a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success">
+                                Checkout <span class="fa fa-play"></span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
     </div>
 
 {% endblock %}

@@ -73,4 +73,22 @@ class SubCategoryController extends Controller {
         ]);
     }
 
+    /**
+     * @Route("/subcategory/delete/{id}", name="app.admin.subcategory.delete")
+     */
+    public function deleteAction($id) {
+
+        $doctrine = $this->getDoctrine();
+        $em = $doctrine->getManager();
+
+        $entity = $doctrine->getRepository('AppBundle:SubCategory')->find($id);
+
+        $em->remove($entity);
+        $em->flush();
+
+        $translator = $this->get('translator.default');
+        $this->addFlash('notice', $translator->trans('flashMessages.subcategory.delete'));
+        return $this->redirectToRoute('app.admin.subcategory.index');
+    }
+
 }

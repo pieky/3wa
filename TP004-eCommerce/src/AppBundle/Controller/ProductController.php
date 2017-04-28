@@ -41,7 +41,7 @@ class ProductController extends Controller{
 
         $locale = $request->getLocale();
         $product = $this->getDoctrine()->getRepository('AppBundle:Product')->getOneProduct($locale, $product);
-        $maxAvailableOrder = $this->get('app.product.string.utils')->maxAvailableOrder($product->getStock());
+        $maxAvailableOrder = $this->get('app.service.product.utils')->maxAvailableOrder($product->getStock());
 
         return $this->render('product/index.html.twig', [
             'product' => $product,

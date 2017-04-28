@@ -61,6 +61,13 @@ profile:
 
 cart:
     title: votre panier
+    empty: votre panier est vide
     button:
         add: ajouter au panier
         delete: supprimer
+    cart:
+        product: produit
+        qte: quantité
+        price: prix
+        total: total
+        shopping:  continuer vos achats

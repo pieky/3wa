@@ -6,14 +6,17 @@ use AppBundle\Subscriber\SubCategorySubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SubCategoryType extends AbstractType
 {
     private $locales;
+    private $request;
 
-    public function __construct($locales){
+    public function __construct($locales, RequestStack $request){
         $this->locales = $locales;
+        $this->request = $request->getMasterRequest();
     }
 
     /**
@@ -27,7 +30,7 @@ class SubCategoryType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => 'AppBundle\Entity\Category',
-                'choice_label' => 'category'
+                'choice_label' => "translations[{$this->request->getLocale()}].name"
         ]);
 
         //souscripteur du formulaire
